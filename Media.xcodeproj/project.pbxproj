@@ -16,6 +16,7 @@
 		C032AC9E2A862D4400592045 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C032AC9D2A862D4400592045 /* Alamofire */; };
 		C032ACA12A862D5B00592045 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = C032ACA02A862D5B00592045 /* SwiftyJSON */; };
 		C032ACA42A862D8000592045 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C032ACA32A862D8000592045 /* Kingfisher */; };
+		C032ACA62A862FC100592045 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C032ACA52A862FC100592045 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		C032AC912A862A0D00592045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C032AC942A862A0D00592045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C032AC962A862A0D00592045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C032ACA52A862FC100592045 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				C032AC882A862A0C00592045 /* AppDelegate.swift */,
 				C032AC8A2A862A0C00592045 /* SceneDelegate.swift */,
+				C032ACA52A862FC100592045 /* .gitignore */,
 				C032AC8C2A862A0C00592045 /* ViewController.swift */,
 				C032AC8E2A862A0C00592045 /* Main.storyboard */,
 				C032AC912A862A0D00592045 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C032ACA62A862FC100592045 /* .gitignore in Resources */,
 				C032AC952A862A0D00592045 /* LaunchScreen.storyboard in Resources */,
 				C032AC922A862A0D00592045 /* Assets.xcassets in Resources */,
 				C032AC902A862A0C00592045 /* Main.storyboard in Resources */,
