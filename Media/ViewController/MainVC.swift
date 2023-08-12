@@ -9,11 +9,36 @@ import UIKit
 
 class MainVC: BaseViewController {
    
+    override func designVC() {
+        
+    }
+    
+    override func configVC() {
+        
+    }
+    
     override func configNavVC() {
-        // 네비게이션바 아래 라인 생기도록하기
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithOpaqueBackground()
-        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "list.bullet"),
+            style: .plain,
+            target: self,
+            action: #selector(naviBarLeftButtonClicked)
+        )
+        navigationItem.leftBarButtonItem?.tintColor = .link
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "magnifyingglass"),
+            style: .plain,
+            target: self,
+            action: #selector(naviBarRightButtonClicked))
+        navigationItem.rightBarButtonItem?.tintColor = .link
     }
 
+    @objc func naviBarLeftButtonClicked(_ sender: UIBarButtonItem) {
+        print("왼쪽버튼 클릭")
+    }
+    
+    @objc func naviBarRightButtonClicked(_ sender: UIBarButtonItem) {
+        print("오른쪽버튼 클릭")
+    }
 }
