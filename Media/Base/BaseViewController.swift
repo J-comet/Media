@@ -17,10 +17,10 @@ class BaseViewController: UIViewController {
     }
     
     private func configDefaultBackgroundColor() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .white
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.darkGray
+        appearance.backgroundColor = UIColor.white
         let titleAttribute = [NSAttributedString.Key.font:  UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor: UIColor.white]
         appearance.titleTextAttributes = titleAttribute
         

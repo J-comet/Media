@@ -23,6 +23,8 @@
 		C032ACB42A873D6D00592045 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACB32A873D6D00592045 /* BaseViewController.swift */; };
 		C032ACB82A874CAE00592045 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACB62A874CAE00592045 /* MediaCollectionViewCell.swift */; };
 		C032ACB92A874CAE00592045 /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C032ACB72A874CAE00592045 /* MediaCollectionViewCell.xib */; };
+		C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */; };
+		C032ACBE2A8763EB00592045 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACBD2A8763EB00592045 /* Media.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		C032ACB32A873D6D00592045 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C032ACB62A874CAE00592045 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		C032ACB72A874CAE00592045 /* MediaCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediaCollectionViewCell.xib; sourceTree = "<group>"; };
+		C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellProtocol.swift; sourceTree = "<group>"; };
+		C032ACBD2A8763EB00592045 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 		C032AC872A862A0C00592045 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				C032ACBC2A8763DF00592045 /* Model */,
 				C032ACB22A873D4F00592045 /* Base */,
 				C032ACAC2A87393D00592045 /* Protocol */,
 				C032AC882A862A0C00592045 /* AppDelegate.swift */,
@@ -105,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				C032ACAD2A87396400592045 /* ReusableViewProtocol.swift */,
+				C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -132,6 +138,14 @@
 				C032ACB72A874CAE00592045 /* MediaCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C032ACBC2A8763DF00592045 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C032ACBD2A8763EB00592045 /* Media.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,8 +232,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
+				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
 				C032ACB12A873BEC00592045 /* MainVC.swift in Sources */,
 				C032ACAB2A8630E500592045 /* APIManager.swift in Sources */,
+				C032ACBE2A8763EB00592045 /* Media.swift in Sources */,
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,
 				C032ACB42A873D6D00592045 /* BaseViewController.swift in Sources */,

@@ -48,6 +48,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uSR-l4-8Sq"/>
+                    <connections>
+                        <outlet property="mediaCollectionView" destination="hcZ-wI-BQk" id="RIK-TK-jes"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
