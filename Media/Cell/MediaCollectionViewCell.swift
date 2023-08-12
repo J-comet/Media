@@ -30,6 +30,9 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        guideVoteAverLabel.isHidden = true
+        voteContainerView.isHidden = true
+        opacityView.isHidden = true
         thumbImageView.image = nil
     }
 
@@ -65,12 +68,11 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     }
     
     func configureCell(row: Media) {
-        
-        dateLabel.text = row.date
-        typeLabel.text = row.getCategory(type: row.mediaType)
+        dateLabel.text = row.getReleaseDate()
+        typeLabel.text = row.getCategory()
         titleLabel.text = row.title
         contentLabel.text = row.content
-        voteLabel.text = row.getVoteAverage(vote: row.vote)
+        voteLabel.text = row.getVoteAverage()
         
         let url = URL(string: URL.imgURL + row.backdropPath)
         if let url {

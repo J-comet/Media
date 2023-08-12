@@ -17,11 +17,19 @@ struct Media {
     var date: String
     var vote: Double
     
-    func getCategory(type: String) -> String {
-        return "#\(type.capitalized)"
+    func getCategory() -> String {
+        return "#\(mediaType.capitalized)"
     }
     
-    func getVoteAverage(vote: Double) -> String {
+    func getVoteAverage() -> String {
         return "\(round(vote * pow(10, 2)) / pow(10, 2))"
+    }
+    
+    func getReleaseDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        return dateFormatter.string(from: date!)
     }
 }

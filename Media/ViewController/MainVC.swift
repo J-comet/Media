@@ -131,5 +131,13 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else {
+            return
+        }
+        vc.media = mediaList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }

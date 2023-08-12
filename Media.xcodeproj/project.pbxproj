@@ -26,6 +26,7 @@
 		C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */; };
 		C032ACBE2A8763EB00592045 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACBD2A8763EB00592045 /* Media.swift */; };
 		C032ACC62A87A58B00592045 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACC52A87A58B00592045 /* URL+Extension.swift */; };
+		C032ACC82A87BD6200592045 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACC72A87BD6200592045 /* DetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellProtocol.swift; sourceTree = "<group>"; };
 		C032ACBD2A8763EB00592045 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		C032ACC52A87A58B00592045 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		C032ACC72A87BD6200592045 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C032ACB02A873BEC00592045 /* MainVC.swift */,
+				C032ACC72A87BD6200592045 /* DetailVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				C032ACB12A873BEC00592045 /* MainVC.swift in Sources */,
 				C032ACC62A87A58B00592045 /* URL+Extension.swift in Sources */,
 				C032ACAB2A8630E500592045 /* APIManager.swift in Sources */,
+				C032ACC82A87BD6200592045 /* DetailVC.swift in Sources */,
 				C032ACBE2A8763EB00592045 /* Media.swift in Sources */,
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,

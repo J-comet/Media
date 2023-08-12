@@ -72,6 +72,13 @@
                                             <constraint firstAttribute="height" constant="20" id="bCn-YT-xSW"/>
                                         </constraints>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-5b-C3h">
+                                        <rect key="frame" x="0.0" y="202.66666666666666" width="493" height="69.999999999999972"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19924461920529801" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="zgb-CE-fGN"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="평점" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPo-c3-ayd">
                                         <rect key="frame" x="20" y="222.66666666666669" width="35" height="30"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
@@ -100,13 +107,6 @@
                                             <constraint firstItem="hcO-bm-VK0" firstAttribute="leading" secondItem="4VH-ED-4k8" secondAttribute="leading" constant="8" id="ZQW-kT-yar"/>
                                             <constraint firstAttribute="trailing" secondItem="hcO-bm-VK0" secondAttribute="trailing" constant="8" id="azl-Hu-ceg"/>
                                             <constraint firstAttribute="bottom" secondItem="hcO-bm-VK0" secondAttribute="bottom" constant="6" id="ptc-gH-BLz"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-5b-C3h">
-                                        <rect key="frame" x="0.0" y="202.66666666666666" width="493" height="69.999999999999972"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19924461920529801" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="zgb-CE-fGN"/>
                                         </constraints>
                                     </view>
                                 </subviews>
