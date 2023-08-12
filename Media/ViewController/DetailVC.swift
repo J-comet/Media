@@ -13,8 +13,12 @@ class DetailVC: BaseViewController {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var guideOverViewLabel: UILabel!
+    @IBOutlet var contentLabel: UILabel!
+    @IBOutlet var moreButton: UIButton!
     
     var media: Media?
+    
+    var isContentOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,18 +26,30 @@ class DetailVC: BaseViewController {
         print(media)
     }
     
+    @IBAction func overViewMoreButtonClicked(_ sender: UIButton) {
+        isContentOpen.toggle()
+        contentLabel.numberOfLines = isContentOpen ? 0 : 2
+        let image = isContentOpen ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
+        moreButton.setImage(image, for: .normal)
+    }
+    
     func designTitle() {
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = .white
     }
     
+    func designContent() {
+        contentLabel.numberOfLines = 2
+        contentLabel.textColor = .black
+        contentLabel.font = .systemFont(ofSize: 15, weight: .regular)
+    }
+    
     override func designVC() {
         designTitle()
-        
+        designContent()
         guideOverViewLabel.font = .systemFont(ofSize: 16, weight: .semibold)
         guideOverViewLabel.textColor = .darkGray
         guideOverViewLabel.text = "OverView"
-        
         backdropImageView.contentMode = .scaleAspectFill
         posterImageView.contentMode = .scaleAspectFit
     }
@@ -42,6 +58,9 @@ class DetailVC: BaseViewController {
         guard let media else { return }
         
         titleLabel.text = media.title
+        contentLabel.text = media.content
+        
+        moreButton.isHidden = contentLabel.countLines() >= 3 ? false : true
         
         let backdropUrl = URL(string: URL.imgURL + media.backdropPath)
         let posterUrl = URL(string: URL.imgURL + media.posterPath)
