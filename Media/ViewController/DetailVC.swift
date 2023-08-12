@@ -23,11 +23,13 @@ class DetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(media)
+//        print(media)
     }
     
     @IBAction func overViewMoreButtonClicked(_ sender: UIButton) {
+        print(#function)
         isContentOpen.toggle()
+        print(isContentOpen)
         contentLabel.numberOfLines = isContentOpen ? 0 : 2
         let image = isContentOpen ? UIImage(systemName: "chevron.up") : UIImage(systemName: "chevron.down")
         moreButton.setImage(image, for: .normal)
