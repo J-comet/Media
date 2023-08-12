@@ -23,7 +23,11 @@ class APIManager {
         return URL.baseURL + "\(type)/\(id)/credits"
     }
     
-    func callTrendRequest(mediaType: String, period: String, page: Int, completionHandler: @escaping (JSON) -> (), failureHandler: @escaping (String) -> Void) {
+    func callTrendRequest(mediaType: String, period: String, page: Int,
+                          completionHandler: @escaping (JSON) -> (),
+                          failureHandler: @escaping (String) -> Void,
+                          endHandler: @escaping () -> Void
+    ) {
 //        let text = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
         let url = requestTrendURL(type: mediaType, period: period, page: "\(page)")
@@ -40,6 +44,7 @@ class APIManager {
                 print(error)
                 failureHandler(error.errorDescription ?? "오류가 발생했습니다")
             }
+            endHandler()
         }
         
     }

@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hcZ-wI-BQk">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xU4-nX-rfJ">
                                     <size key="itemSize" width="128" height="128"/>
@@ -37,18 +37,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-NV-FG6">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="CMt-NV-FG6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4VK-Kd-d91"/>
+                            <constraint firstItem="CMt-NV-FG6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="M3l-0u-0ub"/>
                             <constraint firstItem="hcZ-wI-BQk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SyI-HL-QFf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hcZ-wI-BQk" secondAttribute="trailing" id="lKj-2r-96r"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hcZ-wI-BQk" secondAttribute="bottom" id="qvU-sO-cH2"/>
+                            <constraint firstAttribute="bottom" secondItem="hcZ-wI-BQk" secondAttribute="bottom" id="qvU-sO-cH2"/>
                             <constraint firstItem="hcZ-wI-BQk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="w5h-6Q-XKJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uSR-l4-8Sq"/>
                     <connections>
+                        <outlet property="indicatorView" destination="CMt-NV-FG6" id="sZy-b5-vwc"/>
                         <outlet property="mediaCollectionView" destination="hcZ-wI-BQk" id="RIK-TK-jes"/>
                     </connections>
                 </viewController>

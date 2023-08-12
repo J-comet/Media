@@ -19,6 +19,10 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var voteLabel: UILabel!
     
+    @IBOutlet var guideVoteAverLabel: UILabel!
+    @IBOutlet var voteContainerView: UIView!
+    @IBOutlet var opacityView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         designCell()
@@ -30,6 +34,10 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     }
 
     func designCell() {
+        guideVoteAverLabel.isHidden = true
+        voteContainerView.isHidden = true
+        opacityView.isHidden = true
+        
         dateLabel.font = .systemFont(ofSize: 11, weight: .light)
         dateLabel.textColor = .darkGray
         typeLabel.font = .boldSystemFont(ofSize: 16)
@@ -70,6 +78,9 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
                 let data = try! Data(contentsOf: url)
                 DispatchQueue.main.async {
                     self.thumbImageView.image = UIImage(data: data)
+                    self.guideVoteAverLabel.isHidden = false
+                    self.voteContainerView.isHidden = false
+                    self.opacityView.isHidden = false
                 }
             }
         }

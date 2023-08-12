@@ -10,19 +10,27 @@ import UIKit
 class MainVC: BaseViewController {
    
     @IBOutlet var mediaCollectionView: UICollectionView!
+    @IBOutlet var indicatorView: UIActivityIndicatorView!
     
-    var mediaList: [Media] = []
+    var mediaList: [Media] = [] {
+        didSet {
+            mediaCollectionView.reloadData()
+        }
+    }
     
     var page = 1
     var totalPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        callRequest(page: page)
+    }
+    
+    private func callRequest(page: Int) {
+        indicatorView.startAnimating()
         APIManager.shared.callTrendRequest(mediaType: "movie", period: "week", page: page) { JSON in
-            print(JSON)
             
             self.totalPage = JSON["total_pages"].intValue
-            
             for item in JSON["results"].arrayValue {
                 let media = Media(
                     id: item["id"].intValue,
@@ -36,12 +44,12 @@ class MainVC: BaseViewController {
                 )
                 self.mediaList.append(media)
             }
-            self.mediaCollectionView.reloadData()
             
         } failureHandler: { error in
             print(error)
+        } endHandler: {
+            self.indicatorView.stopAnimating()
         }
-
     }
     
     override func designVC() {
@@ -49,8 +57,10 @@ class MainVC: BaseViewController {
     }
     
     override func configVC() {
+        indicatorView.hidesWhenStopped = true
         mediaCollectionView.dataSource = self
         mediaCollectionView.delegate = self
+        mediaCollectionView.prefetchDataSource = self
         
         let nib = UINib(nibName: MediaCollectionViewCell.identifier, bundle: nil)
         mediaCollectionView.register(nib, forCellWithReuseIdentifier: MediaCollectionViewCell.identifier)
@@ -97,7 +107,17 @@ class MainVC: BaseViewController {
     
 }
 
-extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if mediaList.count - 1 == indexPath.row && page < totalPage {
+                page += 1
+                callRequest(page: page)
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return mediaList.count
     }
