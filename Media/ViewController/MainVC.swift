@@ -26,6 +26,11 @@ class MainVC: BaseViewController {
         callRequest(page: page)
     }
     
+    override func awakeAfter(using coder: NSCoder) -> Any? {
+        navigationItem.backButtonDisplayMode = .minimal
+        return super.awakeAfter(using: coder)
+    }
+    
     private func callRequest(page: Int) {
         indicatorView.startAnimating()
         APIManager.shared.callTrendRequest(mediaType: "movie", period: "week", page: page) { JSON in
@@ -81,6 +86,13 @@ class MainVC: BaseViewController {
             target: self,
             action: #selector(naviBarRightButtonClicked))
         navigationItem.rightBarButtonItem?.tintColor = .link
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
     @objc func naviBarLeftButtonClicked(_ sender: UIBarButtonItem) {
