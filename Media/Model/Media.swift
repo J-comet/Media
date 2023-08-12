@@ -13,6 +13,15 @@ struct Media {
     var title: String
     var content: String
     var posterPath: String
+    var backdropPath: String
     var date: String
     var vote: Double
+    
+    func getCategory(type: String) -> String {
+        return "#\(type.capitalized)"
+    }
+    
+    func getVoteAverage(vote: Double) -> String {
+        return "\(round(vote * pow(10, 2)) / pow(10, 2))"
+    }
 }

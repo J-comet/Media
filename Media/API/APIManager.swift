@@ -13,9 +13,34 @@ class APIManager {
     static let shared = APIManager()
     private init() {}
     
-    private let baseUrl =  "https://api.themoviedb.org/"
+    let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
-    /**
-     APIManager 로 통신 동작하는지 확인하기
-     */
+    func requestTrendURL(type: String, period: String, page: String) -> String {
+        return URL.baseURL + "trending/\(type)/\(period)?page=\(page)&language=ko"
+    }
+    
+    func requestCreditURL(type: String, id: String) -> String {
+        return URL.baseURL + "\(type)/\(id)/credits"
+    }
+    
+    func callTrendRequest(mediaType: String, period: String, page: Int, completionHandler: @escaping (JSON) -> (), failureHandler: @escaping (String) -> Void) {
+//        let text = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let url = requestTrendURL(type: mediaType, period: period, page: "\(page)")
+        print("url = ", url)
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200...500)
+            .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                completionHandler(json)
+            case .failure(let error):
+                print(error)
+                failureHandler(error.errorDescription ?? "오류가 발생했습니다")
+            }
+        }
+        
+    }
 }

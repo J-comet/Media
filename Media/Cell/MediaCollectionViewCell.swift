@@ -17,22 +17,27 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     @IBOutlet var thumbImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
-
+    @IBOutlet var voteLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         designCell()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbImageView.image = nil
+    }
 
     func designCell() {
         dateLabel.font = .systemFont(ofSize: 11, weight: .light)
-        dateLabel.textColor = .systemGray4
-        typeLabel.font = .boldSystemFont(ofSize: 14)
+        dateLabel.textColor = .darkGray
+        typeLabel.font = .boldSystemFont(ofSize: 16)
         typeLabel.textColor = .black
-        titleLabel.font = .systemFont(ofSize: 13, weight: .semibold)
+        titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         titleLabel.textColor = .black
         contentLabel.font = .systemFont(ofSize: 12)
-        contentLabel.textColor = .systemGray4
-        
+        contentLabel.textColor = .darkGray
         
         containerView.layer.cornerRadius = 10
         containerView.layer.borderWidth = 1
@@ -42,9 +47,31 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
         containerView.layer.shadowOffset = CGSize(width: 0, height: 10)
         containerView.layer.shadowRadius = 5
         containerView.layer.masksToBounds = false
+        
+        voteLabel.textColor = .black
+        voteLabel.font = .systemFont(ofSize: 13, weight: .light)
+        
+        thumbImageView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
+        thumbImageView.layer.cornerRadius = 10
+        thumbImageView.contentMode = .scaleAspectFill
     }
     
     func configureCell(row: Media) {
         
+        dateLabel.text = row.date
+        typeLabel.text = row.getCategory(type: row.mediaType)
+        titleLabel.text = row.title
+        contentLabel.text = row.content
+        voteLabel.text = row.getVoteAverage(vote: row.vote)
+        
+        let url = URL(string: URL.imgURL + row.backdropPath)
+        if let url {
+            DispatchQueue.global().async {
+                let data = try! Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    self.thumbImageView.image = UIImage(data: data)
+                }
+            }
+        }
     }
 }

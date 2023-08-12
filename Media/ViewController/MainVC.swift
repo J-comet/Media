@@ -11,8 +11,38 @@ class MainVC: BaseViewController {
    
     @IBOutlet var mediaCollectionView: UICollectionView!
     
-    var mediaList: [Media] = [Media(id: 0, mediaType: "sd", title: "타이틀", content: "내용", posterPath: "이미지주소", date: "2022-10-10", vote: 3.3),
-                              Media(id: 0, mediaType: "sd", title: "타이틀", content: "내용", posterPath: "이미지주소", date: "2022-10-10", vote: 3.3)]
+    var mediaList: [Media] = []
+    
+    var page = 1
+    var totalPage = 1
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        APIManager.shared.callTrendRequest(mediaType: "movie", period: "week", page: page) { JSON in
+            print(JSON)
+            
+            self.totalPage = JSON["total_pages"].intValue
+            
+            for item in JSON["results"].arrayValue {
+                let media = Media(
+                    id: item["id"].intValue,
+                    mediaType: item["media_type"].stringValue,
+                    title: item["title"].stringValue,
+                    content: item["overview"].stringValue,
+                    posterPath: item["poster_path"].stringValue,
+                    backdropPath: item["backdrop_path"].stringValue,
+                    date: item["release_date"].stringValue,
+                    vote: item["vote_average"].doubleValue
+                )
+                self.mediaList.append(media)
+            }
+            self.mediaCollectionView.reloadData()
+            
+        } failureHandler: { error in
+            print(error)
+        }
+
+    }
     
     override func designVC() {
         setCollectionViewLayout()
