@@ -14,6 +14,8 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
     
+    private var workItem: DispatchWorkItem?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         designCell()
@@ -21,7 +23,12 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
+        clear()
+    }
+    
+    private func clear() {
+        thumbImageView.image = nil
+        workItem?.cancel()
     }
     
     func designCell() {
@@ -35,23 +42,45 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     }
     
     func configureCell(row: Cast) {
+        
         nameLabel.text = row.name
         infoLabel.text = row.characterName + " / \(row.castId)"
         
-        let url = URL(string: URL.imgURL + row.profilePath)
-        if let url {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: url)
-                guard let data else {
+        let globalQueue = DispatchQueue.global()
+        
+        workItem = DispatchWorkItem {
+            let url = URL(string: URL.imgURL + row.profilePath)
+            if let url {
+                if let data = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {
-                        self.thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
+                        self.thumbImageView.image = UIImage(data: data)
                     }
-                    return
                 }
-                DispatchQueue.main.async {
-                    self.thumbImageView.image = UIImage(data: data)
-                }
+
             }
         }
+        
+        if let workItem {
+            globalQueue.async(execute: workItem)
+        }
+        
     }
+    
+//    func loadImage(row: Cast) {
+//        let url = URL(string: URL.imgURL + row.profilePath)
+//        if let url {
+//            DispatchQueue.global().async {
+//                let data = try? Data(contentsOf: url)
+//                guard let data else {
+//                    DispatchQueue.main.async {
+//                        self.thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
+//                    }
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    self.thumbImageView.image = UIImage(data: data)
+//                }
+//            }
+//        }
+//    }
 }
