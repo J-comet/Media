@@ -9,12 +9,14 @@ import UIKit
 
 class DetailVC: BaseViewController {
 
+    @IBOutlet var tableHeaderContainerView: UIView!
     @IBOutlet var backdropImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var guideOverViewLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var moreButton: UIButton!
+    @IBOutlet var castTableView: UITableView!
     
     var media: Media?
     
@@ -24,6 +26,18 @@ class DetailVC: BaseViewController {
         super.viewDidLoad()
 
 //        print(media)
+    }
+    
+    // tableHeaderView Dynamic Height Code
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let headerView = castTableView.tableHeaderView else { return }
+        let size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        if headerView.frame.size.height != size.height {
+            headerView.frame.size.height = size.height
+            castTableView.tableHeaderView = headerView
+            castTableView.layoutIfNeeded()
+        }
     }
     
     @IBAction func overViewMoreButtonClicked(_ sender: UIButton) {
