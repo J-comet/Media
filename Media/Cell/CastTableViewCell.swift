@@ -27,7 +27,6 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     }
     
     private func clear() {
-        thumbImageView.image = nil
         workItem?.cancel()
     }
     
@@ -42,45 +41,42 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     }
     
     func configureCell(row: Cast) {
-        
+        thumbImageView.image = UIImage(systemName: "placeholdertext.fill")
         nameLabel.text = row.name
         infoLabel.text = row.characterName + " / \(row.castId)"
         
+        let url = URL(string: URL.imgURL + row.profilePath)
         let globalQueue = DispatchQueue.global()
-        
+
         workItem = DispatchWorkItem {
-            let url = URL(string: URL.imgURL + row.profilePath)
             if let url {
                 if let data = try? Data(contentsOf: url) {
                     DispatchQueue.main.async {
                         self.thumbImageView.image = UIImage(data: data)
                     }
                 }
-
             }
         }
-        
         if let workItem {
             globalQueue.async(execute: workItem)
         }
-        
     }
     
-//    func loadImage(row: Cast) {
-//        let url = URL(string: URL.imgURL + row.profilePath)
-//        if let url {
-//            DispatchQueue.global().async {
-//                let data = try? Data(contentsOf: url)
-//                guard let data else {
-//                    DispatchQueue.main.async {
-//                        self.thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
-//                    }
-//                    return
-//                }
-//                DispatchQueue.main.async {
-//                    self.thumbImageView.image = UIImage(data: data)
-//                }
-//            }
-//        }
-//    }
+    func loadImage(row: Cast) {
+        let url = URL(string: URL.imgURL + row.profilePath)
+        if let url {
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url)
+                guard let data else {
+                    DispatchQueue.main.async {
+                        self.thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
+                    }
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.thumbImageView.image = UIImage(data: data)
+                }
+            }
+        }
+    }
 }
