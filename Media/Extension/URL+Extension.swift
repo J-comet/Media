@@ -10,4 +10,12 @@ import Foundation
 extension URL {
     static let baseURL = "https://api.themoviedb.org/3/"
     static let imgURL = "https://image.tmdb.org/t/p/w400/"
+    
+    static func requestTrendURL(type: String, period: String, page: String) -> String {
+        return URL.baseURL + "trending/\(type)/\(period)?page=\(page)&language=ko"
+    }
+    
+    static func requestCreditURL(type: String, id: String) -> String {
+        return URL.baseURL + "\(type)/\(id)/credits"
+    }
 }

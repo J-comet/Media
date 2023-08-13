@@ -15,12 +15,26 @@ class APIManager {
     
     let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
-    func requestTrendURL(type: String, period: String, page: String) -> String {
-        return URL.baseURL + "trending/\(type)/\(period)?page=\(page)&language=ko"
-    }
-    
-    func requestCreditURL(type: String, id: String) -> String {
-        return URL.baseURL + "\(type)/\(id)/credits"
+    private func callRequest(
+        url: String,
+        completion: @escaping (JSON) -> (),
+        failure: @escaping (String) -> Void,
+        end: @escaping () -> Void
+    ) {
+        print("url = ", url)
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200...500)
+            .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                completion(json)
+            case .failure(let error):
+                print(error)
+                failure(error.errorDescription ?? "오류가 발생했습니다")
+            }
+            end()
+        }
     }
     
     func callTrendRequest(mediaType: String, period: String, page: Int,
@@ -28,24 +42,28 @@ class APIManager {
                           failureHandler: @escaping (String) -> Void,
                           endHandler: @escaping () -> Void
     ) {
-//        let text = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        
-        let url = requestTrendURL(type: mediaType, period: period, page: "\(page)")
-        print("url = ", url)
-        
-        AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200...500)
-            .responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                completionHandler(json)
-            case .failure(let error):
-                print(error)
-                failureHandler(error.errorDescription ?? "오류가 발생했습니다")
-            }
+        let url = URL.requestTrendURL(type: mediaType, period: period, page: "\(page)")
+        callRequest(url: url) { JSON in
+            completionHandler(JSON)
+        } failure: { error in
+            failureHandler(error)
+        } end: {
             endHandler()
         }
-        
+    }
+    
+    func callCreditRequest(mediaType: String, id: String,
+                          completionHandler: @escaping (JSON) -> (),
+                          failureHandler: @escaping (String) -> Void,
+                          endHandler: @escaping () -> Void
+    ) {
+        let url = URL.requestCreditURL(type: mediaType, id: id)
+        callRequest(url: url) { JSON in
+            completionHandler(JSON)
+        } failure: { error in
+            failureHandler(error)
+        } end: {
+            endHandler()
+        }
     }
 }
