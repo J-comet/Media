@@ -13,7 +13,7 @@ class MainVC: BaseViewController {
     @IBOutlet var mediaCollectionView: UICollectionView!
     @IBOutlet var indicatorView: UIActivityIndicatorView!
     
-    var mediaList: [Media] = [] {
+    var trendList: [TrendsResult] = [] {
         didSet {
             mediaCollectionView.reloadData()
         }
@@ -21,6 +21,7 @@ class MainVC: BaseViewController {
     
     var page = 1
     var totalPage = 1
+    var movieGenre = UserDefaults.genre
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +33,23 @@ class MainVC: BaseViewController {
          2. 장르가 저장되어 있다면 바로 movieList 호출 아니면 장르 호출 후 movieList 호출
          */
         
-        APIManager.shared.callRequest33(endPoint: .genre(language: "ko"), responseData: Genres.self) { response in
-            print(response)
-        } failure: { error in
-            print(error)
-        } end: {
-            print("호출 종료")
+        print(movieGenre)
+        
+        if movieGenre.isEmpty {
+            APIManager.shared.call(endPoint: .genre(language: APILaunage.USA.rawValue), responseData: Genres.self) { response in
+                print("저장 값 없어서 저장 진행")
+                UserDefaults.genre = response.genres
+//                self.callTrend(page: self.page)
+                
+            } failure: { error in
+                print(error)
+            } end: { endUrl in
+                print(endUrl)
+            }
+        } else {
+//            callTrend(page: page)
         }
         
-        callRequest(page: page)
     }
     
     override func awakeAfter(using coder: NSCoder) -> Any? {
@@ -48,37 +57,20 @@ class MainVC: BaseViewController {
         return super.awakeAfter(using: coder)
     }
     
-    private func callRequest(page: Int) {
+    private func callTrend(page: Int) {
         indicatorView.startAnimating()
-        APIManager.shared.callTrendRequest(mediaType: "movie", period: "week", page: page) { JSON in
-            
-            self.totalPage = JSON["total_pages"].intValue
-            for item in JSON["results"].arrayValue {
-                var genreIds: [Int] = []
-                
-                for id in item["genre_ids"].arrayValue {
-                    genreIds.append(id.intValue)
-                }
-                
-                let media = Media(
-                    id: item["id"].intValue,
-                    mediaType: item["media_type"].stringValue,
-                    genreIDs: genreIds,
-                    title: item["title"].stringValue,
-                    content: item["overview"].stringValue,
-                    posterPath: item["poster_path"].stringValue,
-                    backdropPath: item["backdrop_path"].stringValue,
-                    date: item["release_date"].stringValue,
-                    vote: item["vote_average"].doubleValue
-                )
-                self.mediaList.append(media)
+        APIManager.shared.call(
+            endPoint: .trend(language: APILaunage.KOREA.rawValue, type: "movie", period: "week", page: String(page)),
+            responseData: Trends.self) { response in
+                print(response)
+                self.totalPage = response.totalPages
+                self.trendList.append(contentsOf: response.results)
+            } failure: { error in
+                print(error)
+            } end: { endUrl in
+                print(endUrl)
+                self.indicatorView.stopAnimating()
             }
-            
-        } failureHandler: { error in
-            print(error)
-        } endHandler: {
-            self.indicatorView.stopAnimating()
-        }
     }
     
     override func designVC() {
@@ -147,15 +139,15 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if mediaList.count - 1 == indexPath.row && page < totalPage {
+            if trendList.count - 1 == indexPath.row && page < totalPage {
                 page += 1
-                callRequest(page: page)
+                callTrend(page: page)
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mediaList.count
+        return trendList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -163,7 +155,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             return UICollectionViewCell()
         }
         
-        cell.configureCell(row: mediaList[indexPath.row])
+        cell.configureCell(row: trendList[indexPath.row])
         return cell
     }
     
@@ -172,7 +164,7 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else {
             return
         }
-        vc.media = mediaList[indexPath.row]
+        vc.trendResult = trendList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -13,25 +13,28 @@ class APIManager {
     static let shared = APIManager()
     private init() {}
     
-    let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
+    let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.testTmdbToken)"]
     
-    func callRequest33<T: Codable>(
+    func call<T: Codable>(
         endPoint: Endpoint,
         responseData: T.Type,
         success: @escaping (_ response: T) -> (),
         failure: @escaping (_ error: String) -> Void,
-        end: @escaping () -> Void
+        end: @escaping (_ endUrl: String) -> Void
     ){
         let url = endPoint.requestURL
         AF.request(url, method: .get).validate()
             .responseDecodable(of: T.self) { response in
+                var requestStatus: String
                 switch response.result {
                 case .success(let data):
                     success(data)
+                    requestStatus = "성공"
                 case .failure(let error):
                     failure(error.errorDescription ?? "오류")
+                    requestStatus = "실패"
                 }
-                end()
+                end("======== \(url) ======== 호출 \(requestStatus)")
             }
     }
     

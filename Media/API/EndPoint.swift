@@ -9,10 +9,14 @@ import Foundation
 
 enum Endpoint {
     case genre(language: String)
+    case trend(language: String, type: String, period: String, page: String)
 
     var requestURL: String {
         switch self {
-        case .genre(language: let language): return URL.makeEndPointString("genre/movie/list?language=\(language)")
+        case .genre(language: let language):
+            return URL.makeEndPointString("genre/movie/list?language=\(language)")
+        case .trend(language: let language, type: let type, period: let period, page: let page):
+            return URL.makeEndPointString("trending/\(type)/\(period)?page=\(page)&language=\(language)")
         }
     }
    

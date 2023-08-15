@@ -19,7 +19,7 @@ class DetailVC: BaseViewController {
     @IBOutlet var castTableView: UITableView!
     @IBOutlet var indicatorView: UIActivityIndicatorView!
     
-    var media: Media?
+    var trendResult: TrendsResult?
     var isContentOpen = false
     var castList: [Cast] = [] {
         didSet {
@@ -110,17 +110,17 @@ class DetailVC: BaseViewController {
         let nib = UINib(nibName: CastTableViewCell.identifier, bundle: nil)
         castTableView.register(nib, forCellReuseIdentifier: CastTableViewCell.identifier)
         
-        guard let media else { return }
+        guard let trendResult else { return }
         
-        callRequest(id: "\(media.id)")
+        callRequest(id: "\(trendResult.id)")
 
-        titleLabel.text = media.title
-        contentLabel.text = media.content
+        titleLabel.text = trendResult.title
+        contentLabel.text = trendResult.overview
         
         moreButton.isHidden = contentLabel.countLines() >= 3 ? false : true
         
-        let backdropUrl = URL(string: URL.imgURL + media.backdropPath)
-        let posterUrl = URL(string: URL.imgURL + media.posterPath)
+        let backdropUrl = URL(string: URL.imgURL + trendResult.backdropPath)
+        let posterUrl = URL(string: URL.imgURL + trendResult.posterPath)
     
         if let backdropUrl, let posterUrl {
             DispatchQueue.global().async {

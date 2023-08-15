@@ -9,7 +9,7 @@ import UIKit
 
 class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     
-    typealias T = Media
+    typealias T = TrendsResult
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
@@ -67,13 +67,13 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
         thumbImageView.contentMode = .scaleAspectFill
     }
     
-    func configureCell(row: Media) {
-        print(row.genreIDs)
-        dateLabel.text = row.getReleaseDate()
-        typeLabel.text = row.getCategory()
-        titleLabel.text = row.title
-        contentLabel.text = row.content
-        voteLabel.text = row.getVoteAverage()
+    func configureCell(row: TrendsResult) {
+        print(row)
+//        dateLabel.text = row.getReleaseDate()
+//        typeLabel.text = row.getCategory()
+//        titleLabel.text = row.title
+//        contentLabel.text = row.content
+//        voteLabel.text = row.getVoteAverage()
         
         let url = URL(string: URL.imgURL + row.backdropPath)
         if let url {
