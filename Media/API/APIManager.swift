@@ -15,6 +15,30 @@ class APIManager {
     
     let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
+    func callRequest22(
+        endPoint: Endpoint,
+        completion: @escaping (JSON) -> (),
+        failure: @escaping (String) -> Void,
+        end: @escaping () -> Void
+    ) {
+//        print("url = ", url)
+        let url = endPoint.requestURL
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200...500)
+            .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                completion(json)
+            case .failure(let error):
+                print(error)
+                failure(error.errorDescription ?? "오류가 발생했습니다")
+            }
+            end()
+        }
+    }
+    
+    
     private func callRequest(
         url: String,
         completion: @escaping (JSON) -> (),

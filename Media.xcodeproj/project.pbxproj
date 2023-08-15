@@ -31,6 +31,7 @@
 		C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACCB2A8892F400592045 /* CastTableViewCell.swift */; };
 		C032ACCE2A8892F400592045 /* CastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C032ACCC2A8892F400592045 /* CastTableViewCell.xib */; };
 		C032ACD02A88948000592045 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACCF2A88948000592045 /* Cast.swift */; };
+		C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE12A8B4EAB00592045 /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		C032ACCB2A8892F400592045 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
 		C032ACCC2A8892F400592045 /* CastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastTableViewCell.xib; sourceTree = "<group>"; };
 		C032ACCF2A88948000592045 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		C032ACE12A8B4EAB00592045 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			children = (
 				C032ACA72A86301300592045 /* APIKey.swift */,
 				C032ACAA2A8630E500592045 /* APIManager.swift */,
+				C032ACE12A8B4EAB00592045 /* EndPoint.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				C032ACD02A88948000592045 /* Cast.swift in Sources */,
 				C032ACBE2A8763EB00592045 /* Media.swift in Sources */,
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
+				C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,
 				C032ACB42A873D6D00592045 /* BaseViewController.swift in Sources */,
 				C032ACAE2A87396400592045 /* ReusableViewProtocol.swift in Sources */,

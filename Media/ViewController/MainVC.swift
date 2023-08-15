@@ -23,6 +23,23 @@ class MainVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        /**
+         먼저 enum  EndPoint 구조부터 잡기
+         1. 장르 UserDefaults 에 저장되어 있는지 확인
+         2. 장르가 저장되어 있다면 바로 movieList 호출 아니면 장르 호출 후 movieList 호출
+         */
+        
+        APIManager.shared.callRequest22(endPoint: .genre(language: "ko")) { JSON in
+            print(JSON)
+        } failure: { error in
+            print(error)
+        } end: {
+            print("종료")
+        }
+
+        
         callRequest(page: page)
     }
     
@@ -37,9 +54,16 @@ class MainVC: BaseViewController {
             
             self.totalPage = JSON["total_pages"].intValue
             for item in JSON["results"].arrayValue {
+                var genreIds: [Int] = []
+                
+                for id in item["genre_ids"].arrayValue {
+                    genreIds.append(id.intValue)
+                }
+                
                 let media = Media(
                     id: item["id"].intValue,
                     mediaType: item["media_type"].stringValue,
+                    genreIDs: genreIds,
                     title: item["title"].stringValue,
                     content: item["overview"].stringValue,
                     posterPath: item["poster_path"].stringValue,

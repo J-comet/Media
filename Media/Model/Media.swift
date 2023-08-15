@@ -10,6 +10,7 @@ import Foundation
 struct Media {
     var id: Int
     var mediaType: String
+    var genreIDs: [Int]
     var title: String
     var content: String
     var posterPath: String

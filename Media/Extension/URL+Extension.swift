@@ -18,4 +18,8 @@ extension URL {
     static func requestCreditURL(type: String, id: String) -> String {
         return URL.baseURL + "\(type)/\(id)/credits"
     }
+    
+    static func makeEndPointString(_ endpoint: String) -> String {
+        return baseURL + endpoint
+    }
 }
