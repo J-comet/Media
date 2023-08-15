@@ -69,11 +69,11 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     
     func configureCell(row: TrendsResult) {
         print(row)
-//        dateLabel.text = row.getReleaseDate()
-//        typeLabel.text = row.getCategory()
-//        titleLabel.text = row.title
-//        contentLabel.text = row.content
-//        voteLabel.text = row.getVoteAverage()
+        dateLabel.text = row.getReleaseDate()
+        typeLabel.text = row.getGenre()
+        titleLabel.text = row.title
+        contentLabel.text = row.overview
+        voteLabel.text = row.getVoteAverage()
         
         let url = URL(string: URL.imgURL + row.backdropPath)
         if let url {

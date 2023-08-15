@@ -58,6 +58,31 @@ struct TrendsResult: Codable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
+    
+    func getGenre() -> String {
+        var result = ""
+        for genre in UserDefaults.genre {
+            for id in genreIDS {
+                if id == genre.id {
+                    result.append("#\(genre.name) ")
+                    break
+                }
+            }
+        }
+        return result
+    }
+    
+    func getVoteAverage() -> String {
+        return "\(round(voteAverage * pow(10, 2)) / pow(10, 2))"
+    }
+    
+    func getReleaseDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let date = dateFormatter.date(from: releaseDate)
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        return dateFormatter.string(from: date!)
+    }
 }
 
 enum MediaType: String, Codable {

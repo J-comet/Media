@@ -32,14 +32,11 @@ class MainVC: BaseViewController {
          1. 장르 UserDefaults 에 저장되어 있는지 확인
          2. 장르가 저장되어 있다면 바로 movieList 호출 아니면 장르 호출 후 movieList 호출
          */
-        
-        print(movieGenre)
-        
         if movieGenre.isEmpty {
             APIManager.shared.call(endPoint: .genre(language: APILaunage.KOREA.rawValue), responseData: Genres.self) { response in
                 print("저장 값 없어서 저장 진행")
                 UserDefaults.genre = response.genres
-//                self.callTrend(page: self.page)
+                self.callTrend(page: self.page)
                 
             } failure: { error in
                 print(error)
@@ -47,9 +44,8 @@ class MainVC: BaseViewController {
                 print(endUrl)
             }
         } else {
-//            callTrend(page: page)
+            callTrend(page: page)
         }
-        
     }
     
     override func awakeAfter(using coder: NSCoder) -> Any? {
@@ -62,7 +58,6 @@ class MainVC: BaseViewController {
         APIManager.shared.call(
             endPoint: .trend(language: APILaunage.KOREA.rawValue, type: "movie", period: "week", page: String(page)),
             responseData: Trends.self) { response in
-                print(response)
                 self.totalPage = response.totalPages
                 self.trendList.append(contentsOf: response.results)
             } failure: { error in
