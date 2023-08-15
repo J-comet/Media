@@ -13,7 +13,7 @@ class APIManager {
     static let shared = APIManager()
     private init() {}
     
-    let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.testTmdbToken)"]
+    let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
     func call<T: Codable>(
         endPoint: Endpoint,
@@ -23,7 +23,7 @@ class APIManager {
         end: @escaping (_ endUrl: String) -> Void
     ){
         let url = endPoint.requestURL
-        AF.request(url, method: .get).validate()
+        AF.request(url, method: .get, headers: header).validate()
             .responseDecodable(of: T.self) { response in
                 var requestStatus: String
                 switch response.result {

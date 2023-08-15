@@ -36,7 +36,7 @@ class MainVC: BaseViewController {
         print(movieGenre)
         
         if movieGenre.isEmpty {
-            APIManager.shared.call(endPoint: .genre(language: APILaunage.USA.rawValue), responseData: Genres.self) { response in
+            APIManager.shared.call(endPoint: .genre(language: APILaunage.KOREA.rawValue), responseData: Genres.self) { response in
                 print("저장 값 없어서 저장 진행")
                 UserDefaults.genre = response.genres
 //                self.callTrend(page: self.page)
