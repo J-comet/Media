@@ -15,29 +15,25 @@ class APIManager {
     
     let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
-    func callRequest22(
+    func callRequest33<T: Codable>(
         endPoint: Endpoint,
-        completion: @escaping (JSON) -> (),
-        failure: @escaping (String) -> Void,
+        responseData: T.Type,
+        success: @escaping (_ response: T) -> (),
+        failure: @escaping (_ error: String) -> Void,
         end: @escaping () -> Void
-    ) {
-//        print("url = ", url)
+    ){
         let url = endPoint.requestURL
-        AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200...500)
-            .responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                completion(json)
-            case .failure(let error):
-                print(error)
-                failure(error.errorDescription ?? "오류가 발생했습니다")
+        AF.request(url, method: .get).validate()
+            .responseDecodable(of: T.self) { response in
+                switch response.result {
+                case .success(let data):
+                    success(data)
+                case .failure(let error):
+                    failure(error.errorDescription ?? "오류")
+                }
+                end()
             }
-            end()
-        }
     }
-    
     
     private func callRequest(
         url: String,
@@ -49,16 +45,16 @@ class APIManager {
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200...500)
             .responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                completion(json)
-            case .failure(let error):
-                print(error)
-                failure(error.errorDescription ?? "오류가 발생했습니다")
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    completion(json)
+                case .failure(let error):
+                    print(error)
+                    failure(error.errorDescription ?? "오류가 발생했습니다")
+                }
+                end()
             }
-            end()
-        }
     }
     
     func callTrendRequest(mediaType: String, period: String, page: Int,
@@ -77,9 +73,9 @@ class APIManager {
     }
     
     func callCreditRequest(mediaType: String, id: String,
-                          completionHandler: @escaping (JSON) -> (),
-                          failureHandler: @escaping (String) -> Void,
-                          endHandler: @escaping () -> Void
+                           completionHandler: @escaping (JSON) -> (),
+                           failureHandler: @escaping (String) -> Void,
+                           endHandler: @escaping () -> Void
     ) {
         let url = URL.requestCreditURL(type: mediaType, id: id)
         callRequest(url: url) { JSON in

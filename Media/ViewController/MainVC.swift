@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MainVC: BaseViewController {
    
@@ -31,14 +32,13 @@ class MainVC: BaseViewController {
          2. 장르가 저장되어 있다면 바로 movieList 호출 아니면 장르 호출 후 movieList 호출
          */
         
-        APIManager.shared.callRequest22(endPoint: .genre(language: "ko")) { JSON in
-            print(JSON)
+        APIManager.shared.callRequest33(endPoint: .genre(language: "ko"), responseData: Genres.self) { response in
+            print(response)
         } failure: { error in
             print(error)
         } end: {
-            print("종료")
+            print("호출 종료")
         }
-
         
         callRequest(page: page)
     }

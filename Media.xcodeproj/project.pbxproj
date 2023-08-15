@@ -32,6 +32,7 @@
 		C032ACCE2A8892F400592045 /* CastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C032ACCC2A8892F400592045 /* CastTableViewCell.xib */; };
 		C032ACD02A88948000592045 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACCF2A88948000592045 /* Cast.swift */; };
 		C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE12A8B4EAB00592045 /* EndPoint.swift */; };
+		C032ACE42A8B693400592045 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE32A8B693400592045 /* Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		C032ACCC2A8892F400592045 /* CastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CastTableViewCell.xib; sourceTree = "<group>"; };
 		C032ACCF2A88948000592045 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		C032ACE12A8B4EAB00592045 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		C032ACE32A8B693400592045 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			children = (
 				C032ACBD2A8763EB00592045 /* Media.swift */,
 				C032ACCF2A88948000592045 /* Cast.swift */,
+				C032ACE32A8B693400592045 /* Genre.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				C032ACD02A88948000592045 /* Cast.swift in Sources */,
 				C032ACBE2A8763EB00592045 /* Media.swift in Sources */,
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
+				C032ACE42A8B693400592045 /* Genre.swift in Sources */,
 				C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,
 				C032ACB42A873D6D00592045 /* BaseViewController.swift in Sources */,
