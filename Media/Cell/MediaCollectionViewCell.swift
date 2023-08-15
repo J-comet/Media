@@ -68,7 +68,6 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     }
     
     func configureCell(row: TrendsResult) {
-        print(row)
         dateLabel.text = row.getReleaseDate()
         typeLabel.text = row.getGenre()
         titleLabel.text = row.title

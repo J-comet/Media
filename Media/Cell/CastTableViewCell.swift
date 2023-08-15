@@ -27,6 +27,7 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     }
     
     private func clear() {
+        thumbImageView.image = UIImage(systemName: "placeholdertext.fill")
         workItem?.cancel()
     }
     
@@ -41,11 +42,22 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     }
     
     func configureCell(row: Cast) {
-        thumbImageView.image = UIImage(systemName: "placeholdertext.fill")
         nameLabel.text = row.name
-        infoLabel.text = row.characterName + " / \(row.castId)"
+        let char = row.character
+        let castID = row.castID
         
-        let url = URL(string: URL.imgURL + row.profilePath)
+        if let char, let castID {
+            infoLabel.text = char + "/ No. \(castID)"
+        } else {
+            if let char {
+                infoLabel.text = char
+            }
+        }
+        
+        guard let profilePath = row.profilePath else {
+            return
+        }
+        let url = URL(string: URL.imgURL + profilePath)
         let globalQueue = DispatchQueue.global()
 
         workItem = DispatchWorkItem {
@@ -59,24 +71,6 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
         }
         if let workItem {
             globalQueue.async(execute: workItem)
-        }
-    }
-    
-    func loadImage(row: Cast) {
-        let url = URL(string: URL.imgURL + row.profilePath)
-        if let url {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: url)
-                guard let data else {
-                    DispatchQueue.main.async {
-                        self.thumbImageView.image = UIImage(systemName: "person.fill.questionmark")
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.thumbImageView.image = UIImage(data: data)
-                }
-            }
         }
     }
 }

@@ -37,10 +37,10 @@ class DetailVC: BaseViewController {
             let defaultLabelHeight = self.contentLabel.frame.size.height / 2
             let openLabelHeight = defaultLabelHeight * CGFloat(self.contentLabel.countLines())
             
-            print(defaultLabelHeight)
-            print(openLabelHeight)
+//            print("defaultLabelHeight = \(defaultLabelHeight)")
+//            print("openLabelHeight = \(openLabelHeight)")
             self.baseChangeHeight = openLabelHeight - self.contentLabel.frame.size.height
-            print(self.baseChangeHeight)
+//            print(self.baseChangeHeight)
         }
     }
     
@@ -61,22 +61,16 @@ class DetailVC: BaseViewController {
     
     func callRequest(id: String) {
         indicatorView.startAnimating()
-        APIManager.shared.callCreditRequest(
-            mediaType: "movie",id: id) { JSON in
-                for item in JSON["cast"].arrayValue {
-                    let cast = Cast(
-                        id: item["id"].intValue,
-                        name: item["name"].stringValue,
-                        characterName: item["character"].stringValue,
-                        castId: item["cast_id"].intValue,
-                        profilePath: item["profile_path"].stringValue
-                    )
-                    self.castList.append(cast)
-                }
-                
-            } failureHandler: { error in
+        
+//        print("id = ",id)
+        
+        APIManager.shared.call(
+            endPoint: .cast(type: "movie", id: id),
+            responseData: Casts.self) { response in
+                self.castList.append(contentsOf: response.cast)
+            } failure: { error in
                 print(error)
-            } endHandler: {
+            } end: { endUrl in
                 self.indicatorView.stopAnimating()
             }
     }
