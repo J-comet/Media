@@ -41,6 +41,7 @@
 		C052F17E2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F17C2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.swift */; };
 		C052F17F2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C052F17D2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.xib */; };
 		C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1802A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift */; };
+		C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1822A8D070A0008C7A6 /* TvDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		C052F17C2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVOnTheAirCollectionViewCell.swift; sourceTree = "<group>"; };
 		C052F17D2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVOnTheAirCollectionViewCell.xib; sourceTree = "<group>"; };
 		C052F1802A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTvOnTheAirVC.swift; sourceTree = "<group>"; };
+		C052F1822A8D070A0008C7A6 /* TvDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				C032ACE32A8B693400592045 /* Genre.swift */,
 				C032ACE92A8B822C00592045 /* Trend.swift */,
 				C052F1782A8CF30D0008C7A6 /* TvOnTheAir.swift */,
+				C052F1822A8D070A0008C7A6 /* TvDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				C032ACE62A8B7C4300592045 /* APILaunage.swift in Sources */,
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
+				C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */,
 				C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */,
 				C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */,
 				C052F1792A8CF30D0008C7A6 /* TvOnTheAir.swift in Sources */,

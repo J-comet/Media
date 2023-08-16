@@ -23,7 +23,7 @@ class APIManager {
         end: @escaping (_ endUrl: String) -> Void
     ){
         let url = endPoint.requestURL
-        AF.request(url, method: .get, headers: header).validate()
+        AF.request(url, method: .get, headers: header).validate(statusCode: 200...500)
             .responseDecodable(of: T.self) { response in
                 var requestStatus: String
                 switch response.result {
@@ -38,25 +38,29 @@ class APIManager {
             }
     }
     
-//    private func callRequest(
-//        url: String,
-//        completion: @escaping (JSON) -> (),
-//        failure: @escaping (String) -> Void,
-//        end: @escaping () -> Void
-//    ) {
-//        print("url = ", url)
-//        AF.request(url, method: .get, headers: header)
-//            .validate(statusCode: 200...500)
-//            .responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    let json = JSON(value)
-//                    completion(json)
-//                case .failure(let error):
-//                    print(error)
-//                    failure(error.errorDescription ?? "오류가 발생했습니다")
-//                }
-//                end()
-//            }
-//    }
+    func call(
+        endPoint: Endpoint,
+        completion: @escaping (JSON) -> (),
+        failure: @escaping (_ error: String) -> Void,
+        end: @escaping (_ endUrl: String) -> Void
+    ) {
+        let url = endPoint.requestURL
+        print("url = ", url)
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200...500)
+            .responseJSON { response in
+                var requestStatus: String
+                switch response.result {
+                case .success(let value):
+                    requestStatus = "성공"
+                    let json = JSON(value)
+                    completion(json)
+                case .failure(let error):
+                    requestStatus = "성공"
+                    print(error)
+                    failure(error.errorDescription ?? "오류가 발생했습니다")
+                }
+                end("======== \(url) ======== 호출 \(requestStatus)")
+            }
+    }
 }

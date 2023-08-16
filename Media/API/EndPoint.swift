@@ -12,7 +12,10 @@ enum Endpoint {
     case trend(language: String, type: String, period: String, page: String)
     case cast(type: String, id: String)
     case tvOnTheAir(language: String, page: String)
+    case tvDetail(sereiesId: String)
     
+    
+    // TODO: 추후 쿼리들은 제거 후 paremeter 로 담아서 보내기
     var requestURL: String {
         switch self {
         case .genre(language: let language):
@@ -23,6 +26,8 @@ enum Endpoint {
             return URL.makeEndPointString("\(type)/\(id)/credits")
         case .tvOnTheAir(language: let language, page: let page):
             return URL.makeEndPointString("tv/on_the_air?language=\(language)&page=\(page)")
+        case .tvDetail(sereiesId: let sereiesId):
+            return URL.makeEndPointString("tv/\(sereiesId)")
         }
     }
    
