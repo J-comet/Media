@@ -25,6 +25,11 @@ class TvOnTheAirMainVC: BaseViewController {
         callTvOnTheAir(page: page)
     }
     
+    override func awakeAfter(using coder: NSCoder) -> Any? {
+        navigationItem.backButtonDisplayMode = .minimal
+        return super.awakeAfter(using: coder)
+    }
+    
     func callTvOnTheAir(page: Int) {
         indicatorView.startAnimating()
         APIManager.shared.call(
@@ -95,6 +100,15 @@ extension TvOnTheAirMainVC: UICollectionViewDelegate, UICollectionViewDataSource
         
         cell.configureCell(row: tvList[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: DetailTvOnTheAirVC.identifier) as? DetailTvOnTheAirVC else {
+            return
+        }
+        vc.tvInfo = tvList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
