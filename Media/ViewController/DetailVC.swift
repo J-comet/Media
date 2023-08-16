@@ -65,7 +65,7 @@ class DetailVC: BaseViewController {
 //        print("id = ",id)
         
         APIManager.shared.call(
-            endPoint: .cast(type: "movie", id: id),
+            endPoint: .cast(type: APIType.movie.rawValue, id: id),
             responseData: Casts.self) { response in
                 self.castList.append(contentsOf: response.cast)
             } failure: { error in

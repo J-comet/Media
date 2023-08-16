@@ -35,6 +35,7 @@
 		C032ACE62A8B7C4300592045 /* APILaunage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE52A8B7C4300592045 /* APILaunage.swift */; };
 		C032ACE82A8B7D7500592045 /* UserDefaultInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */; };
 		C032ACEA2A8B822C00592045 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE92A8B822C00592045 /* Trend.swift */; };
+		C052F1772A8CEC470008C7A6 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1762A8CEC470008C7A6 /* APIType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		C032ACE52A8B7C4300592045 /* APILaunage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILaunage.swift; sourceTree = "<group>"; };
 		C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultInfo+Extension.swift"; sourceTree = "<group>"; };
 		C032ACE92A8B822C00592045 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
+		C052F1762A8CEC470008C7A6 /* APIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				C032ACAA2A8630E500592045 /* APIManager.swift */,
 				C032ACE12A8B4EAB00592045 /* EndPoint.swift */,
 				C032ACE52A8B7C4300592045 /* APILaunage.swift */,
+				C052F1762A8CEC470008C7A6 /* APIType.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
 				C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */,
+				C052F1772A8CEC470008C7A6 /* APIType.swift in Sources */,
 				C032ACB12A873BEC00592045 /* MainVC.swift in Sources */,
 				C032ACC62A87A58B00592045 /* URL+Extension.swift in Sources */,
 				C032ACAB2A8630E500592045 /* APIManager.swift in Sources */,

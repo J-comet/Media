@@ -56,7 +56,7 @@ class MainVC: BaseViewController {
     private func callTrend(page: Int) {
         indicatorView.startAnimating()
         APIManager.shared.call(
-            endPoint: .trend(language: APILaunage.KOREA.rawValue, type: "movie", period: "week", page: String(page)),
+            endPoint: .trend(language: APILaunage.KOREA.rawValue, type: APIType.movie.rawValue, period: "week", page: String(page)),
             responseData: Trends.self) { response in
                 self.totalPage = response.totalPages
                 self.trendList.append(contentsOf: response.results)
