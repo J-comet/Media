@@ -15,7 +15,7 @@ class DetailTvOnTheAirVC: BaseViewController {
     var tvInfo: TvOnTheAirResult?
     
     var seasonList: [Season] = []
-    var episodeList: [String] = []
+    var episodeList: [String] = ["1","2","3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,10 @@ class DetailTvOnTheAirVC: BaseViewController {
                 self.seasonList.append(season)
             }
             
-            print(self.seasonList)
+            dump(self.seasonList)
+            
+            // TODO - 두개 동시에 끝났을 때 reloadData
+            self.detailCollectionView.reloadData()
             
         } failure: { error in
             print("ERROR = ",error)
@@ -68,10 +71,11 @@ class DetailTvOnTheAirVC: BaseViewController {
         let count: CGFloat = 1
         let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
         
-        layout.itemSize = CGSize(width: width / count, height: (width / count) * 1.2)
-        layout.sectionInset = UIEdgeInsets(top: 20, left: spacing, bottom: 20, right: spacing)
+        layout.itemSize = CGSize(width: width / count, height: 100)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = 0
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
         detailCollectionView.collectionViewLayout = layout
     }
     
@@ -83,6 +87,12 @@ class DetailTvOnTheAirVC: BaseViewController {
     override func configVC() {
         detailCollectionView.dataSource = self
         detailCollectionView.delegate = self
+        
+        let nib = UINib(nibName: TvDetailCollectionViewCell.identifier, bundle: nil)
+        detailCollectionView.register(nib, forCellWithReuseIdentifier: TvDetailCollectionViewCell.identifier)
+        
+        // 헤더뷰에 대한 코드
+        detailCollectionView.register(UINib(nibName: HeaderTvDetailCollectionReusableView.identifier, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderTvDetailCollectionReusableView.identifier)
     }
     
     override func configNavVC() {
@@ -100,9 +110,23 @@ extension DetailTvOnTheAirVC: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TvDetailCollectionViewCell.identifier, for: indexPath) as? TvDetailCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.configureCell(row: episodeList[indexPath.row])
+        return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderTvDetailCollectionReusableView.identifier, for: indexPath) as? HeaderTvDetailCollectionReusableView else { return UICollectionReusableView() }
+            view.configView(row: seasonList[indexPath.section])
+            return view
+        } else {
+            return UICollectionReusableView()
+        }
+    }
     
 }
 

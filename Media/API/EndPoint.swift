@@ -13,6 +13,7 @@ enum Endpoint {
     case cast(type: String, id: String)
     case tvOnTheAir(language: String, page: String)
     case tvDetail(sereiesId: String)
+    case tvSeasonDetail(sereiesId: String, seasonNumber: String)
     
     
     // TODO: 추후 쿼리들은 제거 후 paremeter 로 담아서 보내기
@@ -28,6 +29,8 @@ enum Endpoint {
             return URL.makeEndPointString("tv/on_the_air?language=\(language)&page=\(page)")
         case .tvDetail(sereiesId: let sereiesId):
             return URL.makeEndPointString("tv/\(sereiesId)")
+        case .tvSeasonDetail(sereiesId: let sereiesId, seasonNumber: let seasonNumber):
+            return URL.makeEndPointString("tv/\(sereiesId)/season/\(seasonNumber)")
         }
     }
    
