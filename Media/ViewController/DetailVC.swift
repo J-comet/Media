@@ -100,6 +100,7 @@ class DetailVC: BaseViewController {
         castTableView.rowHeight = 70
         castTableView.dataSource = self
         castTableView.delegate = self
+        castTableView.prefetchDataSource = self
         
         let nib = UINib(nibName: CastTableViewCell.identifier, bundle: nil)
         castTableView.register(nib, forCellReuseIdentifier: CastTableViewCell.identifier)
@@ -145,7 +146,18 @@ class DetailVC: BaseViewController {
 
 }
 
-extension DetailVC: UITableViewDelegate, UITableViewDataSource {
+extension DetailVC: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        print("------- 취소 -------")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CastTableViewCell.identifier) as? CastTableViewCell else { return }
+        cell.clear()
+    }
+    
     
     // 테이블뷰 섹션 텍스트 스타일
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

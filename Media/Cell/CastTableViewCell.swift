@@ -23,10 +23,10 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        clear()
+//        clear()
     }
     
-    private func clear() {
+    func clear() {
         thumbImageView.image = UIImage(systemName: "placeholdertext.fill")
         workItem?.cancel()
     }
