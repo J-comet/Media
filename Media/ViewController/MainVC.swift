@@ -91,11 +91,17 @@ class MainVC: BaseViewController {
         )
         navigationItem.leftBarButtonItem?.tintColor = .link
         
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(
+//            image: UIImage(systemName: "magnifyingglass"),
+//            style: .plain,
+//            target: self,
+//            action: #selector(naviBarRightButtonClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "magnifyingglass"),
+            title: "TV",
             style: .plain,
             target: self,
-            action: #selector(naviBarRightButtonClicked))
+            action: #selector(naviBarRightButtonClicked)
+        )
         navigationItem.rightBarButtonItem?.tintColor = .link
         
         let appearance = UINavigationBarAppearance()
@@ -111,7 +117,9 @@ class MainVC: BaseViewController {
     }
     
     @objc func naviBarRightButtonClicked(_ sender: UIBarButtonItem) {
-        print("오른쪽버튼 클릭")
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: TvOnTheAirMainVC.identifier) as? TvOnTheAirMainVC else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setCollectionViewLayout() {
