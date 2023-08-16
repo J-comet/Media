@@ -74,7 +74,7 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
         contentLabel.text = row.overview
         voteLabel.text = row.getVoteAverage()
         
-        let url = URL(string: URL.imgURL + row.backdropPath)
+        let url = URL(string: URL.getImg(imgaePath: row.backdropPath))
         if let url {
             DispatchQueue.global().async {
                 let data = try! Data(contentsOf: url)

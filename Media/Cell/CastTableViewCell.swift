@@ -57,7 +57,7 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
         guard let profilePath = row.profilePath else {
             return
         }
-        let url = URL(string: URL.imgURL + profilePath)
+        let url = URL(string: URL.getImg(imgaePath: profilePath))
         let globalQueue = DispatchQueue.global()
 
         workItem = DispatchWorkItem {
