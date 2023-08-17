@@ -26,9 +26,14 @@ class APIManager {
         
         var parameters: Parameters = [:]
         if let parameterDic {
-            for (key, value) in parameterDic {
+            parameterDic.forEach { (key: String, value: Any) in
                 parameters.updateValue(value, forKey: key)
+                
             }
+            
+//            for (key, value) in parameterDic {
+//                parameters.updateValue(value, forKey: key)
+//            }
         }
         
         let url = endPoint.requestURL
