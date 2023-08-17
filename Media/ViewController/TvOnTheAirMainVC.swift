@@ -33,7 +33,7 @@ class TvOnTheAirMainVC: BaseViewController {
     func callTvOnTheAir(page: Int) {
         indicatorView.startAnimating()
         APIManager.shared.call(
-            endPoint: .tvOnTheAir(language: APILaunage.KOREA.rawValue, page: String(page)),
+            endPoint: .tvOnTheAir(language: .korea, page: String(page)),
             responseData: TvOnTheAir.self) { response in
                 self.totalPage = response.totalPages
                 self.tvList.append(contentsOf: response.results)

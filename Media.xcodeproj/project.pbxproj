@@ -36,7 +36,7 @@
 		C032ACD02A88948000592045 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACCF2A88948000592045 /* Cast.swift */; };
 		C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE12A8B4EAB00592045 /* EndPoint.swift */; };
 		C032ACE42A8B693400592045 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE32A8B693400592045 /* Genre.swift */; };
-		C032ACE62A8B7C4300592045 /* APILaunage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE52A8B7C4300592045 /* APILaunage.swift */; };
+		C032ACE62A8B7C4300592045 /* APILanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE52A8B7C4300592045 /* APILanguage.swift */; };
 		C032ACE82A8B7D7500592045 /* UserDefaultInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */; };
 		C032ACEA2A8B822C00592045 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032ACE92A8B822C00592045 /* Trend.swift */; };
 		C052F1772A8CEC470008C7A6 /* APIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1762A8CEC470008C7A6 /* APIType.swift */; };
@@ -77,7 +77,7 @@
 		C032ACCF2A88948000592045 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		C032ACE12A8B4EAB00592045 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		C032ACE32A8B693400592045 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
-		C032ACE52A8B7C4300592045 /* APILaunage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILaunage.swift; sourceTree = "<group>"; };
+		C032ACE52A8B7C4300592045 /* APILanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APILanguage.swift; sourceTree = "<group>"; };
 		C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaultInfo+Extension.swift"; sourceTree = "<group>"; };
 		C032ACE92A8B822C00592045 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		C052F1762A8CEC470008C7A6 /* APIType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIType.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				C032ACA72A86301300592045 /* APIKey.swift */,
 				C032ACAA2A8630E500592045 /* APIManager.swift */,
 				C032ACE12A8B4EAB00592045 /* EndPoint.swift */,
-				C032ACE52A8B7C4300592045 /* APILaunage.swift */,
+				C032ACE52A8B7C4300592045 /* APILanguage.swift */,
 				C052F1762A8CEC470008C7A6 /* APIType.swift */,
 			);
 			path = API;
@@ -306,7 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C032ACE62A8B7C4300592045 /* APILaunage.swift in Sources */,
+				C032ACE62A8B7C4300592045 /* APILanguage.swift in Sources */,
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
 				C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APILaunage: String {
-    case KOREA = "ko"
-    case USA = "en"
+enum APILanguage: String {
+    case korea = "ko"
+    case usa = "en"
 }

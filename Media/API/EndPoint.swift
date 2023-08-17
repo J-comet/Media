@@ -8,10 +8,10 @@
 import Foundation
 
 enum Endpoint {
-    case genre(language: String)
-    case trend(language: String, type: String, period: String, page: String)
-    case cast(type: String, id: String)
-    case tvOnTheAir(language: String, page: String)
+    case genre(language: APILanguage)
+    case trend(language: APILanguage, type: APIType, period: String, page: String)
+    case cast(type: APIType, id: String)
+    case tvOnTheAir(language: APILanguage, page: String)
     case tvDetail(sereiesId: String)
     case tvSeasonDetail(sereiesId: String, seasonNumber: String)
     
@@ -20,9 +20,9 @@ enum Endpoint {
     var requestURL: String {
         switch self {
         case .genre(language: let language):
-            return URL.makeEndPointString("genre/movie/list?language=\(language)")
+            return URL.makeEndPointString("genre/movie/list?language=\(language.rawValue)")
         case .trend(language: let language, type: let type, period: let period, page: let page):
-            return URL.makeEndPointString("trending/\(type)/\(period)?page=\(page)&language=\(language)")
+            return URL.makeEndPointString("trending/\(type.rawValue)/\(period)?page=\(page)&language=\(language)")
         case .cast(type: let type, id: let id):
             return URL.makeEndPointString("\(type)/\(id)/credits")
         case .tvOnTheAir(language: let language, page: let page):
