@@ -60,8 +60,13 @@ class MainVC: BaseViewController {
     private func callTrend(page: Int) {
         indicatorView.startAnimating()
         APIManager.shared.call(
-            endPoint: .trend(language: .korea, type: .movie, period: "week", page: String(page)),
-            responseData: Trends.self) { response in
+            endPoint: .trend(type: .movie, period: "week"),
+            responseData: Trends.self,
+            parameterDic: [
+                "language":APILanguage.korea.rawValue,
+                "page":String(page)
+            ]
+        ) { response in
                 self.totalPage = response.totalPages
                 self.trendList.append(contentsOf: response.results)
             } failure: { error in
