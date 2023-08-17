@@ -33,7 +33,11 @@ class MainVC: BaseViewController {
          2. 장르가 저장되어 있다면 바로 movieList 호출 아니면 장르 호출 후 movieList 호출
          */
         if movieGenre.isEmpty {
-            APIManager.shared.call(endPoint: .genre(language: .korea), responseData: Genres.self) { response in
+            APIManager.shared.call(
+                endPoint: .genre,
+                responseData: Genres.self,
+                parameterDic: ["language": APILanguage.korea.rawValue]
+            ) { response in
                 print("저장 값 없어서 저장 진행")
                 UserDefaults.genre = response.genres
                 self.callTrend(page: self.page)

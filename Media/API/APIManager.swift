@@ -18,12 +18,21 @@ class APIManager {
     func call<T: Codable>(
         endPoint: Endpoint,
         responseData: T.Type,
+        parameterDic: [String:Any]? = nil,
         success: @escaping (_ response: T) -> (),
         failure: @escaping (_ error: String) -> Void,
         end: @escaping (_ endUrl: String) -> Void
     ){
+        
+        var parameters: Parameters = [:]
+        if let parameterDic {
+            for (key, value) in parameterDic {
+                parameters.updateValue(value, forKey: key)
+            }
+        }
+        
         let url = endPoint.requestURL
-        AF.request(url, method: .get, headers: header).validate(statusCode: 200...500)
+        AF.request(url, method: .get, parameters: parameters, headers: header).validate(statusCode: 200...500)
             .responseDecodable(of: T.self) { response in
                 var requestStatus: String
                 switch response.result {
