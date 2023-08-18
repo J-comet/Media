@@ -23,17 +23,12 @@ class APIManager {
         failure: @escaping (_ error: String) -> Void,
         end: @escaping (_ endUrl: String) -> Void
     ){
-        
         var parameters: Parameters = [:]
         if let parameterDic {
             parameterDic.forEach { (key, value) in
                 parameters.updateValue(value, forKey: key)
                 
             }
-            
-//            for (key, value) in parameterDic {
-//                parameters.updateValue(value, forKey: key)
-//            }
         }
         
         let url = endPoint.requestURL
@@ -51,6 +46,43 @@ class APIManager {
                 end("======== \(url) ======== 호출 \(requestStatus)")
             }
     }
+    
+    /**
+     TODO : 그룹화가 필요할 때 어떤식으로 묶어서 할 수 있을지?
+     */
+    func callGroup(
+        start: () -> Void,
+        call: () -> Void,
+        end: @escaping () -> Void
+    ) {
+        start()
+        let group = DispatchGroup()
+        
+//        callSimiliar(page: page) { data in
+//            print("callSimiliar")
+//        } start: {
+//            group.enter()
+//        } end: {
+//            group.leave()
+//        }
+//
+//        callVideo { data in
+//            print("callVideo")
+//        } start: {
+//            group.enter()
+//        } end: {
+//            group.leave()
+//        }
+
+        group.notify(queue: .main) {
+            print("모두 종료")
+            end()
+        }
+    }
+    
+    
+    
+    
     
     func call(
         endPoint: Endpoint,

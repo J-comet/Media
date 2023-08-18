@@ -18,8 +18,14 @@ class SegmentMovieVC: BaseViewController {
     @IBOutlet var moviewCollectionView: UICollectionView!
     @IBOutlet var segmentControl: UISegmentedControl!
     
-    var movieId = 671
+    var movieId = 672
     var page = 1
+    
+    
+    var similar: SimilarMovie?
+    var videoMovie: VideoMovie?
+    
+    var similarList: [SimilarMovieResult] = []
     
     /**
      similar 은 제공되는 이미지가 있지만 video 는 제공되는 이미지가 없음
@@ -29,9 +35,14 @@ class SegmentMovieVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         indicatorView.color = .blue
-        indicatorView.hidesWhenStopped = true
         segmentControl.addTarget(self, action: #selector(segconChanged), for: .valueChanged)
         callGroup()
+        
+        /**
+         1. 컬렉션 헤더뷰를 만들어서 전달 받은 movie 정보의 이미지를 뿌려준다
+         2. 컬렉션 헤더뷰를 클릭하면 youtube 로 이동
+         3. 세그먼트 눌렀을 때는 스크롤 해당 위치로 이동 similiar 누르면 제일 상단, video 누르면 두번째 헤더 뷰
+         */
     }
     
     @objc
@@ -39,10 +50,8 @@ class SegmentMovieVC: BaseViewController {
         switch Mode(rawValue: sender.selectedSegmentIndex) {
         case .similar:
             print("similar")
-            
         case .video:
             print("video")
-            
         case .none:
             print("error")
         }
@@ -53,6 +62,8 @@ class SegmentMovieVC: BaseViewController {
         let group = DispatchGroup()
         callSimiliar(page: page) { data in
             print("callSimiliar")
+            self.similar = data
+            print(data)
         } start: {
             group.enter()
         } end: {
@@ -60,7 +71,7 @@ class SegmentMovieVC: BaseViewController {
         }
         
         callVideo { data in
-            print("callVideo")
+            self.videoMovie = data
         } start: {
             group.enter()
         } end: {
@@ -69,6 +80,8 @@ class SegmentMovieVC: BaseViewController {
 
         group.notify(queue: .main) {
             print("모두 종료")
+            self.similarList = self.similar?.results ?? []
+            self.moviewCollectionView.reloadData()
             self.indicatorView.stopAnimating()
         }
     }
@@ -89,7 +102,6 @@ class SegmentMovieVC: BaseViewController {
             ]
         ) { response in
             success(response)
-            //                dump(response)
         } failure: { error in
             print(error)
         } end: { endUrl in
@@ -112,7 +124,6 @@ class SegmentMovieVC: BaseViewController {
             ]
         ) { response in
             success(response)
-            //                dump(response)
         } failure: { error in
             print(error)
         } end: { endUrl in
@@ -123,15 +134,64 @@ class SegmentMovieVC: BaseViewController {
     
     override func designVC() {
         designSegControl()
+        setCollectionViewLayout()
     }
     
     override func configVC() {
+        indicatorView.hidesWhenStopped = true
+        moviewCollectionView.delegate = self
+        moviewCollectionView.dataSource = self
+//        moviewCollectionView.prefetchDataSource = self
         
+        let nib = UINib(nibName: SimiliarCollectionViewCell.identifier, bundle: nil)
+        moviewCollectionView.register(nib, forCellWithReuseIdentifier: SimiliarCollectionViewCell.identifier)
     }
     
     func designSegControl() {
         segmentControl.setTitle("Similar", forSegmentAt: Mode.similar.rawValue)
         segmentControl.setTitle("Video", forSegmentAt: Mode.video.rawValue)
+    }
+    
+    private func setCollectionViewLayout() {
+        moviewCollectionView.showsVerticalScrollIndicator = false
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 10
+        let count: CGFloat = 3
+        let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
+        
+        layout.itemSize = CGSize(width: width / count, height: (width / count) * 1.5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = 0
+//        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
+        moviewCollectionView.collectionViewLayout = layout
+    }
+    
+}
+
+extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return similarList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimiliarCollectionViewCell.identifier, for: indexPath) as? SimiliarCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        
+        cell.configureCell(row: similarList[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        
+        return UICollectionReusableView()
     }
     
 }

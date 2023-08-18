@@ -23,7 +23,7 @@ class CastTableViewCell: UITableViewCell, BaseCellProtocol {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        clear()
+        clear()
     }
     
     func clear() {
