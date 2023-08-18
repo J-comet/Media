@@ -26,7 +26,7 @@ class APIManager {
         
         var parameters: Parameters = [:]
         if let parameterDic {
-            parameterDic.forEach { (key: String, value: Any) in
+            parameterDic.forEach { (key, value) in
                 parameters.updateValue(value, forKey: key)
                 
             }
