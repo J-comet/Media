@@ -15,7 +15,7 @@ enum Endpoint {
     case tvDetail(sereiesId: String)
     case tvSeasonDetail(sereiesId: String, seasonNumber: String)
     case similar(movieId: String)
-    case movieVideos(moviedId: String)
+    case movieVideos(movieId: String)
     
     
     var requestURL: String {
@@ -41,7 +41,7 @@ enum Endpoint {
         case .similar(movieId: let id):
             return URL.makeEndPointString("movie/\(id)/similar")
             
-        case .movieVideos(moviedId: let id):
+        case .movieVideos(movieId: let id):
             return URL.makeEndPointString("movie/\(id)/videos")
         
         }

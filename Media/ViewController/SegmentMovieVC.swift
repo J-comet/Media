@@ -21,9 +21,17 @@ class SegmentMovieVC: BaseViewController {
     var movieId = 671
     var page = 1
     
+    /**
+     similar 은 제공되는 이미지가 있지만 video 는 제공되는 이미지가 없음
+     두개 동시 호출해서 item 만들기
+     */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        indicatorView.color = .blue
+        indicatorView.hidesWhenStopped = true
         segmentControl.addTarget(self, action: #selector(segconChanged), for: .valueChanged)
+        callGroup()
     }
     
     @objc
@@ -31,16 +39,47 @@ class SegmentMovieVC: BaseViewController {
         switch Mode(rawValue: sender.selectedSegmentIndex) {
         case .similar:
             print("similar")
-            callSimiliar(page: page)
+            
         case .video:
             print("video")
+            
         case .none:
             print("error")
         }
     }
     
-    private func callSimiliar(page: Int) {
+    private func callGroup() {
         indicatorView.startAnimating()
+        let group = DispatchGroup()
+        callSimiliar(page: page) { data in
+            print("callSimiliar")
+        } start: {
+            group.enter()
+        } end: {
+            group.leave()
+        }
+        
+        callVideo { data in
+            print("callVideo")
+        } start: {
+            group.enter()
+        } end: {
+            group.leave()
+        }
+
+        group.notify(queue: .main) {
+            print("모두 종료")
+            self.indicatorView.stopAnimating()
+        }
+    }
+    
+    private func callSimiliar(
+        page: Int,
+        success: @escaping (SimilarMovie) -> Void,
+        start: () -> Void,
+        end: @escaping () -> Void
+    ) {
+        start()
         APIManager.shared.call(
             endPoint: .similar(movieId: String(movieId)),
             responseData: SimilarMovie.self,
@@ -49,13 +88,37 @@ class SegmentMovieVC: BaseViewController {
                 "page" : String(page)
             ]
         ) { response in
-                dump(response)
-            } failure: { error in
-                print(error)
-            } end: { endUrl in
-                print(endUrl)
-                self.indicatorView.stopAnimating()
-            }
+            success(response)
+            //                dump(response)
+        } failure: { error in
+            print(error)
+        } end: { endUrl in
+            print(endUrl)
+            end()
+        }
+    }
+    
+    private func callVideo(
+        success: @escaping (VideoMovie) -> Void,
+        start: () -> Void,
+        end: @escaping () -> Void
+    ) {
+        start()
+        APIManager.shared.call(
+            endPoint: .movieVideos(movieId: String(movieId)),
+            responseData: VideoMovie.self,
+            parameterDic: [
+                "language" : APILanguage.korea.rawValue
+            ]
+        ) { response in
+            success(response)
+            //                dump(response)
+        } failure: { error in
+            print(error)
+        } end: { endUrl in
+            print(endUrl)
+            end()
+        }
     }
     
     override func designVC() {
@@ -70,5 +133,5 @@ class SegmentMovieVC: BaseViewController {
         segmentControl.setTitle("Similar", forSegmentAt: Mode.similar.rawValue)
         segmentControl.setTitle("Video", forSegmentAt: Mode.video.rawValue)
     }
-
+    
 }
