@@ -8,8 +8,6 @@
 import UIKit
 
 class HeaderTvDetailCollectionReusableView: UICollectionReusableView {
-
-    static let identifier = "HeaderTvDetailCollectionReusableView"
     
     @IBOutlet var headerTitleLabel: UILabel!
     

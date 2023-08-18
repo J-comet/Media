@@ -16,6 +16,9 @@
 		C02E178A2A8F7335001ABEC9 /* VideoMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17892A8F7335001ABEC9 /* VideoMovie.swift */; };
 		C02E178F2A8F952C001ABEC9 /* SimiliarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E178D2A8F952C001ABEC9 /* SimiliarCollectionViewCell.swift */; };
 		C02E17902A8F952C001ABEC9 /* SimiliarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E178E2A8F952C001ABEC9 /* SimiliarCollectionViewCell.xib */; };
+		C02E17942A8FAF6F001ABEC9 /* HeaderSimilarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17922A8FAF6F001ABEC9 /* HeaderSimilarView.swift */; };
+		C02E17952A8FAF6F001ABEC9 /* HeaderSimilarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E17932A8FAF6F001ABEC9 /* HeaderSimilarView.xib */; };
+		C02E17972A8FB226001ABEC9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17962A8FB226001ABEC9 /* UIView+Extension.swift */; };
 		C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032AC882A862A0C00592045 /* AppDelegate.swift */; };
 		C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C032AC8A2A862A0C00592045 /* SceneDelegate.swift */; };
 		C032AC902A862A0C00592045 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C032AC8E2A862A0C00592045 /* Main.storyboard */; };
@@ -63,6 +66,9 @@
 		C02E17892A8F7335001ABEC9 /* VideoMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMovie.swift; sourceTree = "<group>"; };
 		C02E178D2A8F952C001ABEC9 /* SimiliarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimiliarCollectionViewCell.swift; sourceTree = "<group>"; };
 		C02E178E2A8F952C001ABEC9 /* SimiliarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimiliarCollectionViewCell.xib; sourceTree = "<group>"; };
+		C02E17922A8FAF6F001ABEC9 /* HeaderSimilarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSimilarView.swift; sourceTree = "<group>"; };
+		C02E17932A8FAF6F001ABEC9 /* HeaderSimilarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderSimilarView.xib; sourceTree = "<group>"; };
+		C02E17962A8FB226001ABEC9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C032AC852A862A0C00592045 /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C032AC882A862A0C00592045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C032AC8A2A862A0C00592045 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +212,8 @@
 				C02E175D2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.xib */,
 				C02E178D2A8F952C001ABEC9 /* SimiliarCollectionViewCell.swift */,
 				C02E178E2A8F952C001ABEC9 /* SimiliarCollectionViewCell.xib */,
+				C02E17922A8FAF6F001ABEC9 /* HeaderSimilarView.swift */,
+				C02E17932A8FAF6F001ABEC9 /* HeaderSimilarView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 				C032ACC52A87A58B00592045 /* URL+Extension.swift */,
 				C032ACC92A87CC8200592045 /* UILabel+Extension.swift */,
 				C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */,
+				C02E17962A8FB226001ABEC9 /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -310,6 +319,7 @@
 				C02E175F2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.xib in Resources */,
 				C032AC952A862A0D00592045 /* LaunchScreen.storyboard in Resources */,
 				C032AC922A862A0D00592045 /* Assets.xcassets in Resources */,
+				C02E17952A8FAF6F001ABEC9 /* HeaderSimilarView.xib in Resources */,
 				C032AC902A862A0C00592045 /* Main.storyboard in Resources */,
 				C052F17F2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.xib in Resources */,
 			);
@@ -322,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C02E17972A8FB226001ABEC9 /* UIView+Extension.swift in Sources */,
 				C032ACE62A8B7C4300592045 /* APILanguage.swift in Sources */,
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
@@ -329,6 +340,7 @@
 				C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */,
 				C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */,
 				C052F1792A8CF30D0008C7A6 /* TvOnTheAir.swift in Sources */,
+				C02E17942A8FAF6F001ABEC9 /* HeaderSimilarView.swift in Sources */,
 				C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */,
 				C052F1772A8CEC470008C7A6 /* APIType.swift in Sources */,
 				C032ACB12A873BEC00592045 /* MainVC.swift in Sources */,

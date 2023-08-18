@@ -145,6 +145,9 @@ class SegmentMovieVC: BaseViewController {
         
         let nib = UINib(nibName: SimiliarCollectionViewCell.identifier, bundle: nil)
         moviewCollectionView.register(nib, forCellWithReuseIdentifier: SimiliarCollectionViewCell.identifier)
+        
+        // 헤더뷰에 대한 코드
+        moviewCollectionView.register(UINib(nibName: HeaderSimilarView.identifier, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderSimilarView.identifier)
     }
     
     func designSegControl() {
@@ -156,14 +159,15 @@ class SegmentMovieVC: BaseViewController {
         moviewCollectionView.showsVerticalScrollIndicator = false
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
+        let sectionSpacing: CGFloat = 24
         let count: CGFloat = 3
         let width: CGFloat = UIScreen.main.bounds.width - (spacing * (count + 1))
         
         layout.itemSize = CGSize(width: width / count, height: (width / count) * 1.5)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: spacing)
+        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: spacing, bottom: 0, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = 0
-//        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 50)
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.6)
         moviewCollectionView.collectionViewLayout = layout
     }
     
@@ -189,9 +193,22 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderSimilarView.identifier, for: indexPath) as? HeaderSimilarView else { return UICollectionReusableView() }
+            view.configView(imgPath: similar?.results[0].backdropPath ?? "")
+            view.delegate = self
+            
+            return view
+        } else {
+            return UICollectionReusableView()
+        }
+    }
 
-        
-        return UICollectionReusableView()
+}
+
+extension SegmentMovieVC: HeaderSimilarViewDelegate {
+    func youtubeButtonTapped() {
+        print("youtube 로 이동")
     }
     
 }
