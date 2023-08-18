@@ -32,15 +32,19 @@ class HeaderSimilarView: UICollectionReusableView {
         self.delegate?.youtubeButtonTapped()
     }
     
-    func configView(imgPath: String) {
+    func configView(row: TrendsResult) {
         backdropImageView.kf.setImage(
-            with: URL(string: URL.getImg(imgaePath: imgPath)),
+            with: URL(string: URL.getImg(imgaePath: row.backdropPath)),
           placeholder: nil,
           options: [
             .transition(.fade(0.1))
           ],
           completionHandler: nil
         )
+        
+        titleLabel.text = row.title
+        genreLabel.text = row.getGenre()
+        overViewLabel.text = row.overview
     }
     
     func youtubeButtonClicked(clickAction: Selector) {
@@ -53,11 +57,11 @@ class HeaderSimilarView: UICollectionReusableView {
         designButton()
         
         titleLabel.textColor = .white
-        titleLabel.font = .boldSystemFont(ofSize: 15)
+        titleLabel.font = .boldSystemFont(ofSize: 18)
         titleLabel.numberOfLines = 0
         titleLabel.lineBreakMode = .byWordWrapping
         
-        genreLabel.font = .systemFont(ofSize: 12)
+        genreLabel.font = .systemFont(ofSize: 14)
         genreLabel.textColor = .white
         genreLabel.numberOfLines = 1
         

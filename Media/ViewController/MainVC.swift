@@ -183,7 +183,8 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         
         // SegmentMovieVC 로 이동
         guard let vc = sb.instantiateViewController(withIdentifier: SegmentMovieVC.identifier) as? SegmentMovieVC else { return }
-        vc.movieId = trendList[indexPath.row].id
+//        vc.movieId = trendList[indexPath.row].id
+        vc.movie = trendList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     

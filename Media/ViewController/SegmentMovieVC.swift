@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SegmentMovieVC: BaseViewController {
     
@@ -18,9 +19,9 @@ class SegmentMovieVC: BaseViewController {
     @IBOutlet var moviewCollectionView: UICollectionView!
     @IBOutlet var segmentControl: UISegmentedControl!
     
-    var movieId = 0
+    var movie: TrendsResult?
     var page = 1
-    
+    var totalPage = 1
     
     var similar: SimilarMovie?
     var videoMovie: VideoMovie?
@@ -63,26 +64,31 @@ class SegmentMovieVC: BaseViewController {
         callSimiliar(page: page) { data in
             print("callSimiliar")
             self.similar = data
-            print(data)
         } start: {
             group.enter()
         } end: {
             group.leave()
         }
         
-        callVideo { data in
-            self.videoMovie = data
-        } start: {
-            group.enter()
-        } end: {
-            group.leave()
+        if page == 1 {
+            callVideo { data in
+                self.videoMovie = data
+            } start: {
+                group.enter()
+            } end: {
+                group.leave()
+            }
         }
+        
 
         group.notify(queue: .main) {
             print("모두 종료")
-            self.similarList = self.similar?.results ?? []
-            self.moviewCollectionView.reloadData()
             self.indicatorView.stopAnimating()
+            
+            guard let similarData = self.similar else { return }
+            self.totalPage = similarData.totalPages
+            self.similarList.append(contentsOf: similarData.results)
+            self.moviewCollectionView.reloadData()
         }
     }
     
@@ -92,9 +98,10 @@ class SegmentMovieVC: BaseViewController {
         start: () -> Void,
         end: @escaping () -> Void
     ) {
+        guard let movie else { return }
         start()
         APIManager.shared.call(
-            endPoint: .similar(movieId: String(movieId)),
+            endPoint: .similar(movieId: String(movie.id)),
             responseData: SimilarMovie.self,
             parameterDic: [
                 "language" : APILanguage.korea.rawValue,
@@ -115,9 +122,10 @@ class SegmentMovieVC: BaseViewController {
         start: () -> Void,
         end: @escaping () -> Void
     ) {
+        guard let movie else { return }
         start()
         APIManager.shared.call(
-            endPoint: .movieVideos(movieId: String(movieId)),
+            endPoint: .movieVideos(movieId: String(movie.id)),
             responseData: VideoMovie.self,
             parameterDic: [
                 "language" : APILanguage.korea.rawValue
@@ -141,13 +149,17 @@ class SegmentMovieVC: BaseViewController {
         indicatorView.hidesWhenStopped = true
         moviewCollectionView.delegate = self
         moviewCollectionView.dataSource = self
-//        moviewCollectionView.prefetchDataSource = self
+        moviewCollectionView.prefetchDataSource = self
         
         let nib = UINib(nibName: SimiliarCollectionViewCell.identifier, bundle: nil)
         moviewCollectionView.register(nib, forCellWithReuseIdentifier: SimiliarCollectionViewCell.identifier)
         
         // 헤더뷰에 대한 코드
         moviewCollectionView.register(UINib(nibName: HeaderSimilarView.identifier, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderSimilarView.identifier)
+    }
+    
+    override func configNavVC() {
+        title = "비슷한 영화"
     }
     
     func designSegControl() {
@@ -173,10 +185,19 @@ class SegmentMovieVC: BaseViewController {
     
 }
 
-extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if similarList.count - 1 == indexPath.row && page < totalPage {
+                page += 1
+                callGroup()
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -194,21 +215,28 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
+            
             guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderSimilarView.identifier, for: indexPath) as? HeaderSimilarView else { return UICollectionReusableView() }
-            view.configView(imgPath: similar?.results[0].backdropPath ?? "")
-            view.delegate = self
+            
+            if let movie {
+                view.configView(row: movie)
+                view.delegate = self
+            }
             
             return view
         } else {
             return UICollectionReusableView()
         }
     }
-
 }
 
 extension SegmentMovieVC: HeaderSimilarViewDelegate {
     func youtubeButtonTapped() {
-        print("youtube 로 이동")
+        guard let videoMovie else { return }
+        let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: videoMovie.results[0].key)) as? URL
+        guard let youtubeUrl else { return }
+        let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)
+        self.present(safariView, animated: true, completion: nil)
     }
     
 }
