@@ -173,10 +173,17 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else {
-            return
-        }
-        vc.trendResult = trendList[indexPath.row]
+        
+        // DetailVC 로 이동
+//        guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else {
+//            return
+//        }
+//        vc.trendResult = trendList[indexPath.row]
+//        navigationController?.pushViewController(vc, animated: true)
+        
+        // SegmentMovieVC 로 이동
+        guard let vc = sb.instantiateViewController(withIdentifier: SegmentMovieVC.identifier) as? SegmentMovieVC else { return }
+        vc.movieId = trendList[indexPath.row].id
         navigationController?.pushViewController(vc, animated: true)
     }
     

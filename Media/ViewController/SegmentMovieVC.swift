@@ -18,7 +18,7 @@ class SegmentMovieVC: BaseViewController {
     @IBOutlet var moviewCollectionView: UICollectionView!
     @IBOutlet var segmentControl: UISegmentedControl!
     
-    var movieId = 672
+    var movieId = 0
     var page = 1
     
     
