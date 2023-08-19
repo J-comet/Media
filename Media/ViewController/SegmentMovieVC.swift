@@ -81,6 +81,23 @@ class SegmentMovieVC: BaseViewController {
         }
     }
     
+    func showSheet(videoMovieResult: [VideoMovieResult], handler: ((UIAlertAction) -> Void)? = nil) {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        videoMovieResult.enumerated().forEach { idx, result in
+            let action = UIAlertAction(title: "Youtube [\(idx + 1)]", style: .default) { _ in
+                let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: result.key)) as? URL
+                guard let youtubeUrl else { return }
+                let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)
+                self.present(safariView, animated: true, completion: nil)
+            }
+            sheet.addAction(action)
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        sheet.addAction(cancelAction)
+        present(sheet, animated: true)
+    }
+    
     override func designVC() {
         setCollectionViewLayout()
     }
@@ -172,12 +189,12 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource, 
             
             guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderSimilarView.identifier, for: indexPath) as? HeaderSimilarView else { return UICollectionReusableView() }
             
-            if let movie {
-                view.configView(row: movie)
+            if let movie, let videoMovie {
+                view.configView(row: movie, videoMovie: videoMovie)
                 view.delegate = self
             }
-            
             return view
+            
         } else {
             return UICollectionReusableView()
         }
@@ -188,11 +205,21 @@ extension SegmentMovieVC: HeaderSimilarViewDelegate {
     func youtubeButtonTapped() {
         guard let videoMovie else { return }
         
+        if videoMovie.results.count == 1 {
+            let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: videoMovie.results[0].key)) as? URL
+            guard let youtubeUrl else { return }
+            let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)
+            self.present(safariView, animated: true, completion: nil)
+        } else {
+            showSheet(videoMovieResult: videoMovie.results)
+        }
+        
+        
         // TODO : videoMovie.results 가 2개이상이면 어떻게 보여줄지?
-        let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: videoMovie.results[0].key)) as? URL
-        guard let youtubeUrl else { return }
-        let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)
-        self.present(safariView, animated: true, completion: nil)
+//        let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: videoMovie.results[0].key)) as? URL
+//        guard let youtubeUrl else { return }
+//        let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)
+//        self.present(safariView, animated: true, completion: nil)
     }
     
 }

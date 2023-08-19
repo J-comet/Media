@@ -32,7 +32,7 @@ class HeaderSimilarView: UICollectionReusableView {
         self.delegate?.youtubeButtonTapped()
     }
     
-    func configView(row: TrendsResult) {
+    func configView(row: TrendsResult, videoMovie: VideoMovie) {
         backdropImageView.kf.setImage(
             with: URL(string: URL.getImg(imgaePath: row.backdropPath)),
           placeholder: nil,
@@ -45,6 +45,8 @@ class HeaderSimilarView: UICollectionReusableView {
         titleLabel.text = row.title
         genreLabel.text = row.getGenre()
         overViewLabel.text = row.overview
+        
+        moveLinkButton.isHidden = videoMovie.results.isEmpty ? true : false        
     }
     
     func youtubeButtonClicked(clickAction: Selector) {
