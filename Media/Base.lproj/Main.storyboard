@@ -17,15 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g3i-yg-hQx">
-                                <rect key="frame" x="131" y="75" width="131" height="32"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dRx-LK-dwd">
-                                <rect key="frame" x="0.0" y="114" width="393" height="704"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dZi-RM-c2u">
                                     <size key="itemSize" width="128" height="128"/>
@@ -51,20 +44,17 @@
                         <viewLayoutGuide key="safeArea" id="0ae-iv-p1P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="g3i-yg-hQx" firstAttribute="top" secondItem="0ae-iv-p1P" secondAttribute="top" constant="16" id="Gwg-Ji-nLG"/>
                             <constraint firstItem="7xH-gI-4Cr" firstAttribute="centerY" secondItem="g5f-Py-kBI" secondAttribute="centerY" id="Kft-k5-EQB"/>
-                            <constraint firstItem="dRx-LK-dwd" firstAttribute="top" secondItem="g3i-yg-hQx" secondAttribute="bottom" constant="8" id="Xgu-As-vXr"/>
+                            <constraint firstItem="dRx-LK-dwd" firstAttribute="top" secondItem="0ae-iv-p1P" secondAttribute="top" id="Xgu-As-vXr"/>
                             <constraint firstItem="7xH-gI-4Cr" firstAttribute="centerX" secondItem="g5f-Py-kBI" secondAttribute="centerX" id="dhb-sH-eug"/>
                             <constraint firstItem="dRx-LK-dwd" firstAttribute="leading" secondItem="0ae-iv-p1P" secondAttribute="leading" id="fHC-QO-0Wh"/>
                             <constraint firstItem="0ae-iv-p1P" firstAttribute="bottom" secondItem="dRx-LK-dwd" secondAttribute="bottom" id="ium-56-oUW"/>
-                            <constraint firstItem="g3i-yg-hQx" firstAttribute="centerX" secondItem="g5f-Py-kBI" secondAttribute="centerX" id="nMi-YZ-Jwx"/>
                             <constraint firstItem="0ae-iv-p1P" firstAttribute="trailing" secondItem="dRx-LK-dwd" secondAttribute="trailing" id="vFC-FQ-z8H"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="indicatorView" destination="7xH-gI-4Cr" id="jiI-Kn-fGg"/>
                         <outlet property="moviewCollectionView" destination="dRx-LK-dwd" id="bJn-9d-rYC"/>
-                        <outlet property="segmentControl" destination="g3i-yg-hQx" id="8Yf-E7-q6M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6p-zb-lB2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

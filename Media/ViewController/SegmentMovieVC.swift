@@ -10,14 +10,8 @@ import SafariServices
 
 class SegmentMovieVC: BaseViewController {
     
-    enum Mode: Int {
-        case similar
-        case video
-    }
-    
     @IBOutlet var indicatorView: UIActivityIndicatorView!
     @IBOutlet var moviewCollectionView: UICollectionView!
-    @IBOutlet var segmentControl: UISegmentedControl!
     
     var movie: TrendsResult?
     var page = 1
@@ -28,120 +22,66 @@ class SegmentMovieVC: BaseViewController {
     
     var similarList: [SimilarMovieResult] = []
     
-    /**
-     similar 은 제공되는 이미지가 있지만 video 는 제공되는 이미지가 없음
-     두개 동시 호출해서 item 만들기
-     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         indicatorView.color = .blue
-        segmentControl.addTarget(self, action: #selector(segconChanged), for: .valueChanged)
         callGroup()
-        
-        /**
-         1. 컬렉션 헤더뷰를 만들어서 전달 받은 movie 정보의 이미지를 뿌려준다
-         2. 컬렉션 헤더뷰를 클릭하면 youtube 로 이동
-         3. 세그먼트 눌렀을 때는 스크롤 해당 위치로 이동 similiar 누르면 제일 상단, video 누르면 두번째 헤더 뷰
-         */
     }
-    
-    @objc
-    func segconChanged(_ sender: UISegmentedControl) {
-        switch Mode(rawValue: sender.selectedSegmentIndex) {
-        case .similar:
-            print("similar")
-        case .video:
-            print("video")
-        case .none:
-            print("error")
-        }
-    }
-    
-    private func callGroup() {
-        indicatorView.startAnimating()
-        let group = DispatchGroup()
-        callSimiliar(page: page) { data in
-            print("callSimiliar")
-            self.similar = data
-        } start: {
-            group.enter()
-        } end: {
-            group.leave()
-        }
-        
-        if page == 1 {
-            callVideo { data in
-                self.videoMovie = data
-            } start: {
-                group.enter()
-            } end: {
-                group.leave()
-            }
-        }
-        
 
-        group.notify(queue: .main) {
-            print("모두 종료")
+    private func callGroup() {
+        APIManager.shared.callGroup { group in
+            guard let movie else { return }
+            callSimiliar(group: group, movieId: String(movie.id))
+            if page == 1 {
+                callVideo(group: group, movieId: String(movie.id))
+            }
+        } groupStart: {
+            indicatorView.startAnimating()
+        } groupNotify: {
             self.indicatorView.stopAnimating()
-            
             guard let similarData = self.similar else { return }
             self.totalPage = similarData.totalPages
             self.similarList.append(contentsOf: similarData.results)
             self.moviewCollectionView.reloadData()
+            
+            if self.page == 1 {
+                self.moviewCollectionView.setContentOffset(.zero, animated: true)
+            }
         }
     }
     
-    private func callSimiliar(
-        page: Int,
-        success: @escaping (SimilarMovie) -> Void,
-        start: () -> Void,
-        end: @escaping () -> Void
-    ) {
-        guard let movie else { return }
-        start()
+    private func callSimiliar(group: DispatchGroup, movieId: String) {
         APIManager.shared.call(
-            endPoint: .similar(movieId: String(movie.id)),
+            group: group,
+            endPoint: .similar(movieId: movieId),
             responseData: SimilarMovie.self,
             parameterDic: [
                 "language" : APILanguage.korea.rawValue,
                 "page" : String(page)
             ]
         ) { response in
-            success(response)
+                self.similar = response
         } failure: { error in
             print(error)
-        } end: { endUrl in
-            print(endUrl)
-            end()
         }
     }
     
-    private func callVideo(
-        success: @escaping (VideoMovie) -> Void,
-        start: () -> Void,
-        end: @escaping () -> Void
-    ) {
-        guard let movie else { return }
-        start()
+    private func callVideo(group: DispatchGroup, movieId: String) {
         APIManager.shared.call(
-            endPoint: .movieVideos(movieId: String(movie.id)),
+            group: group,
+            endPoint: .movieVideos(movieId: movieId),
             responseData: VideoMovie.self,
             parameterDic: [
                 "language" : APILanguage.korea.rawValue
             ]
         ) { response in
-            success(response)
+                self.videoMovie = response
         } failure: { error in
             print(error)
-        } end: { endUrl in
-            print(endUrl)
-            end()
         }
     }
     
     override func designVC() {
-        designSegControl()
         setCollectionViewLayout()
     }
     
@@ -160,11 +100,6 @@ class SegmentMovieVC: BaseViewController {
     
     override func configNavVC() {
         title = "비슷한 영화"
-    }
-    
-    func designSegControl() {
-        segmentControl.setTitle("Similar", forSegmentAt: Mode.similar.rawValue)
-        segmentControl.setTitle("Video", forSegmentAt: Mode.video.rawValue)
     }
     
     private func setCollectionViewLayout() {
@@ -213,6 +148,25 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // 현재페이지 선택한 아이템의 movieId 로 다시 api 호출 화면 갱신
+        let row = similarList[indexPath.row]
+        print("선택한 영화 =", row.id)
+        // 거의 비슷한 데이터를 copy 하는 느낌? 같은 구조체였으면..
+        let currentMovie = TrendsResult(
+            adult: row.adult, backdropPath: row.backdropPath ?? "", id: row.id,
+            title: row.title, originalLanguage: row.originalLanguage,
+            originalTitle: row.originalTitle, overview: row.overview,
+            posterPath: row.posterPath ?? "", mediaType: "movie", genreIDS: row.genreIDS,
+            popularity: row.popularity, releaseDate: row.releaseDate,
+            video: row.video, voteAverage: row.voteAverage, voteCount: row.voteCount
+        )
+        similarList.removeAll()
+        page = 1
+        movie = currentMovie
+        callGroup()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             
@@ -233,6 +187,8 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource, 
 extension SegmentMovieVC: HeaderSimilarViewDelegate {
     func youtubeButtonTapped() {
         guard let videoMovie else { return }
+        
+        // TODO : videoMovie.results 가 2개이상이면 어떻게 보여줄지?
         let youtubeUrl = NSURL(string: URL.getYoutubeLink(key: videoMovie.results[0].key)) as? URL
         guard let youtubeUrl else { return }
         let safariView: SFSafariViewController = SFSafariViewController(url: youtubeUrl)

@@ -15,6 +15,9 @@ class APIManager {
     
     let header: HTTPHeaders = ["Authorization":"Bearer \(APIKey.tmdbToken)"]
     
+    /**
+     하나의 API 만 호출할 때 사용
+     */
     func call<T: Codable>(
         endPoint: Endpoint,
         responseData: T.Type,
@@ -27,12 +30,12 @@ class APIManager {
         if let parameterDic {
             parameterDic.forEach { (key, value) in
                 parameters.updateValue(value, forKey: key)
-                
             }
         }
         
         let url = endPoint.requestURL
-        AF.request(url, method: .get, parameters: parameters, headers: header).validate(statusCode: 200...500)
+        AF.request(url, method: .get, parameters: parameters, headers: header)
+            .validate(statusCode: 200...500)
             .responseDecodable(of: T.self) { response in
                 var requestStatus: String
                 switch response.result {
@@ -48,42 +51,67 @@ class APIManager {
     }
     
     /**
-     TODO : 그룹화가 필요할 때 어떤식으로 묶어서 할 수 있을지?
+     DispatchGroup 을 필요로 할 때 사용
+     */
+    func call<T: Codable>(
+        group: DispatchGroup,
+        endPoint: Endpoint,
+        responseData: T.Type,
+        parameterDic: [String:Any]? = nil,
+        success: @escaping (_ response: T) -> Void,
+        failure: @escaping (_ error: String) -> Void
+    ) {
+        group.enter()
+        var parameters: Parameters = [:]
+        if let parameterDic {
+            parameterDic.forEach { (key, value) in
+                parameters.updateValue(value, forKey: key)
+            }
+        }
+        
+        let url = endPoint.requestURL
+        AF.request(url, method: .get, parameters: parameters, headers: header)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: T.self) { response in
+                var requestStatus: String
+                switch response.result {
+                case .success(let data):
+                    success(data)
+                    requestStatus = "성공"
+                case .failure(let error):
+                    failure(error.errorDescription ?? "오류")
+                    requestStatus = "실패"
+                }
+                print("======== \(url) ======== 호출 \(requestStatus)")
+                group.leave()
+            }
+    }
+    
+    
+    
+    /**
+      DispatchGroup 쉽게 사용하도록 묶은 함수
      */
     func callGroup(
-        start: () -> Void,
-        call: () -> Void,
-        end: @escaping () -> Void
+        callRequest: (DispatchGroup) -> Void,
+        groupStart: () -> Void,
+        groupNotify: @escaping () -> Void
     ) {
-        start()
+        groupStart()
         let group = DispatchGroup()
-        
-//        callSimiliar(page: page) { data in
-//            print("callSimiliar")
-//        } start: {
-//            group.enter()
-//        } end: {
-//            group.leave()
-//        }
-//
-//        callVideo { data in
-//            print("callVideo")
-//        } start: {
-//            group.enter()
-//        } end: {
-//            group.leave()
-//        }
-
+        callRequest(group)
         group.notify(queue: .main) {
             print("모두 종료")
-            end()
+            groupNotify()
         }
     }
     
     
     
     
-    
+    /**
+     SwiftyJSON 으로 Alamofire 호출
+     */
     func call(
         endPoint: Endpoint,
         completion: @escaping (JSON) -> (),
@@ -91,7 +119,6 @@ class APIManager {
         end: @escaping (_ endUrl: String) -> Void
     ) {
         let url = endPoint.requestURL
-        print("url = ", url)
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200...500)
             .responseJSON { response in

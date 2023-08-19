@@ -32,9 +32,9 @@ struct TrendsResult: Codable {
     let backdropPath: String
     let id: Int
     let title: String
-    let originalLanguage: OriginalLanguage
+    let originalLanguage: String
     let originalTitle, overview, posterPath: String
-    let mediaType: MediaType
+    let mediaType: String
     let genreIDS: [Int]
     let popularity: Double
     let releaseDate: String
@@ -85,12 +85,3 @@ struct TrendsResult: Codable {
     }
 }
 
-enum MediaType: String, Codable {
-    case movie = "movie"
-}
-
-enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case hi = "hi"
-    case ja = "ja"
-}
