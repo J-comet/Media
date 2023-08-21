@@ -16,6 +16,7 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
     @IBOutlet var containerView: UIView!
     @IBOutlet var thumbImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var originTitleLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var voteLabel: UILabel!
     
@@ -47,6 +48,10 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
         typeLabel.textColor = .black
         titleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         titleLabel.textColor = .black
+       
+        originTitleLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        originTitleLabel.textColor = .lightGray
+        
         contentLabel.font = .systemFont(ofSize: 12)
         contentLabel.textColor = .darkGray
         
@@ -71,6 +76,7 @@ class MediaCollectionViewCell: UICollectionViewCell, BaseCellProtocol {
         dateLabel.text = row.getReleaseDate()
         typeLabel.text = row.getGenre()
         titleLabel.text = row.title
+        originTitleLabel.text = row.originalTitle
         contentLabel.text = row.overview
         voteLabel.text = row.getVoteAverage()
         
