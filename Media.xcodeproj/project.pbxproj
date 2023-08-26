@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C018F4912A9998AB002565B0 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018F4902A9998AB002565B0 /* OnboardingVC.swift */; };
+		C018F4942A999AAC002565B0 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018F4932A999AAC002565B0 /* IntroVC.swift */; };
+		C018F4972A999F11002565B0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C018F4962A999F11002565B0 /* SnapKit */; };
+		C018F4992A99AE6D002565B0 /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018F4982A99AE6D002565B0 /* OnboardingNextButton.swift */; };
 		C02E175A2A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */; };
 		C02E175B2A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */; };
 		C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */; };
@@ -57,6 +61,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C018F4902A9998AB002565B0 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		C018F4932A999AAC002565B0 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		C018F4982A99AE6D002565B0 /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
 		C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTvDetailCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -111,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C032ACA42A862D8000592045 /* Kingfisher in Frameworks */,
+				C018F4972A999F11002565B0 /* SnapKit in Frameworks */,
 				C032ACA12A862D5B00592045 /* SwiftyJSON in Frameworks */,
 				C032AC9E2A862D4400592045 /* Alamofire in Frameworks */,
 			);
@@ -119,6 +127,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C018F4922A9999D0002565B0 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				C018F4902A9998AB002565B0 /* OnboardingVC.swift */,
+				C018F4932A999AAC002565B0 /* IntroVC.swift */,
+				C018F4982A99AE6D002565B0 /* OnboardingNextButton.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		C032AC7C2A862A0C00592045 = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +198,7 @@
 		C032ACAF2A873BC400592045 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C018F4922A9999D0002565B0 /* Onboarding */,
 				C032ACB02A873BEC00592045 /* MainVC.swift */,
 				C032ACC72A87BD6200592045 /* DetailVC.swift */,
 				C052F17A2A8CF3420008C7A6 /* TvOnTheAirMainVC.swift */,
@@ -263,6 +282,7 @@
 				C032AC9D2A862D4400592045 /* Alamofire */,
 				C032ACA02A862D5B00592045 /* SwiftyJSON */,
 				C032ACA32A862D8000592045 /* Kingfisher */,
+				C018F4962A999F11002565B0 /* SnapKit */,
 			);
 			productName = Media;
 			productReference = C032AC852A862A0C00592045 /* Media.app */;
@@ -296,6 +316,7 @@
 				C032AC9C2A862D4400592045 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C032AC9F2A862D5B00592045 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				C032ACA22A862D8000592045 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C018F4952A999F11002565B0 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = C032AC862A862A0C00592045 /* Products */;
 			projectDirPath = "";
@@ -337,8 +358,10 @@
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
 				C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */,
+				C018F4942A999AAC002565B0 /* IntroVC.swift in Sources */,
 				C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */,
 				C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */,
+				C018F4912A9998AB002565B0 /* OnboardingVC.swift in Sources */,
 				C052F1792A8CF30D0008C7A6 /* TvOnTheAir.swift in Sources */,
 				C02E17942A8FAF6F001ABEC9 /* HeaderSimilarView.swift in Sources */,
 				C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */,
@@ -353,6 +376,7 @@
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
 				C032ACE42A8B693400592045 /* Genre.swift in Sources */,
 				C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */,
+				C018F4992A99AE6D002565B0 /* OnboardingNextButton.swift in Sources */,
 				C02E17862A8F6606001ABEC9 /* SegmentMovieVC.swift in Sources */,
 				C02E178A2A8F7335001ABEC9 /* VideoMovie.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,
@@ -592,6 +616,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C018F4952A999F11002565B0 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		C032AC9C2A862D4400592045 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -619,6 +651,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C018F4962A999F11002565B0 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C018F4952A999F11002565B0 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		C032AC9D2A862D4400592045 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C032AC9C2A862D4400592045 /* XCRemoteSwiftPackageReference "Alamofire" */;
