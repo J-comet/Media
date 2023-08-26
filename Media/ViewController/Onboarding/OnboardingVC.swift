@@ -18,10 +18,24 @@ class OnboardingVC: UIPageViewController {
         ]
     }()
     
-    @objc let nextButton = {
+    let nextButton = {
         let view = OnboardingNextButton()
         return view
     }()
+    
+    let skipButton = {
+        let view = UIButton()
+        var attString = AttributedString("SKIP")
+        attString.font = .systemFont(ofSize: 12, weight: .medium)
+        attString.foregroundColor = .white
+        var config = UIButton.Configuration.filled()
+        config.attributedTitle = attString
+        config.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+        config.baseBackgroundColor = .black
+        view.configuration = config
+        return view
+    }()
+    
     
     var currentPageIdx = 0
     
@@ -48,8 +62,15 @@ class OnboardingVC: UIPageViewController {
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
-        
         nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
+        
+        view.addSubview(skipButton)
+        skipButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(44)
+        }
+        skipButton.addTarget(self, action: #selector(skipButtonClicked), for: .touchUpInside)
     }
     
     @objc
@@ -59,6 +80,18 @@ class OnboardingVC: UIPageViewController {
             setViewControllers([list[currentPageIdx]], direction: .forward, animated: true)
         }
         print(currentPageIdx)
+        skipButtonStatus(currentIdx: currentPageIdx)
+        setButtonLabel(currentIdx: currentPageIdx)
+    }
+    
+    @objc
+    func skipButtonClicked() {
+        if currentPageIdx < list.count - 1  {
+            currentPageIdx = list.count - 1
+            guard let lastIntro = list.last else { return }
+            setViewControllers([lastIntro], direction: .forward, animated: true)
+        }
+        skipButtonStatus(currentIdx: currentPageIdx)
         setButtonLabel(currentIdx: currentPageIdx)
     }
     
@@ -68,6 +101,10 @@ class OnboardingVC: UIPageViewController {
         } else {
             nextButton.configureView(text: "next")
         }
+    }
+    
+    func skipButtonStatus(currentIdx: Int) {
+        skipButton.isHidden = currentIdx == list.count - 1 ? true : false
     }
 }
 
@@ -104,6 +141,7 @@ extension OnboardingVC: UIPageViewControllerDelegate, UIPageViewControllerDataSo
                     if vc == currentVC {
                         print(idx, vc)
                         currentPageIdx = idx
+                        skipButtonStatus(currentIdx: currentPageIdx)
                         setButtonLabel(currentIdx: currentPageIdx)
                     }
                 }
