@@ -15,8 +15,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = OnboardingVC()
-        window?.makeKeyAndVisible()
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        
+        if UserDefaults.isLaunched {
+            window?.rootViewController = OnboardingVC()
+            window?.makeKeyAndVisible()
+        } else {
+            let vc = sb.instantiateViewController(withIdentifier: MainVC.identifier) as? MainVC
+            if let vc {
+                window?.rootViewController = UINavigationController(rootViewController: vc)
+                window?.makeKeyAndVisible()
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

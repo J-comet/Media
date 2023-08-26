@@ -78,6 +78,17 @@ class OnboardingVC: UIPageViewController {
         if currentPageIdx < list.count - 1  {
             currentPageIdx += 1
             setViewControllers([list[currentPageIdx]], direction: .forward, animated: true)
+        } else {
+            print("last")
+            UserDefaults.isLaunched = false
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let sceneDelegate = windowScene?.delegate as? SceneDelegate
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            guard let vc = sb.instantiateViewController(withIdentifier: MainVC.identifier) as? MainVC else {
+                return
+            }
+            sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: vc)
+            sceneDelegate?.window?.makeKeyAndVisible()
         }
         print(currentPageIdx)
         skipButtonStatus(currentIdx: currentPageIdx)
