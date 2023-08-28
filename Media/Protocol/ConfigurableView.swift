@@ -16,3 +16,4 @@ public extension ConfigurableView {
     }
 }
 extension UIView: ConfigurableView { }
+extension UICollectionViewLayout: ConfigurableView { }
