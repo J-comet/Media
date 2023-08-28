@@ -17,14 +17,24 @@ class TrendView: BaseView {
         view.register(TrendCollectionViewCell.self, forCellWithReuseIdentifier: TrendCollectionViewCell.identifier)
     }
     
+    let indicatorView = UIActivityIndicatorView().setup { view in
+        view.hidesWhenStopped = true
+    }
+    
     override func configureView() {
         addSubview(collectionView)
+        addSubview(indicatorView)
     }
     
     override func setConstraints() {
         collectionView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        
+        indicatorView.snp.makeConstraints {
+            $0.size.equalTo(50)
+            $0.center.equalToSuperview()
         }
     }
     

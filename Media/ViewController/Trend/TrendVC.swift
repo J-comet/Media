@@ -23,6 +23,8 @@ class TrendVC: CodeBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configNavVC()
+        
         if movieGenre.isEmpty {
             APIManager.shared.call(
                 endPoint: .genre,
@@ -48,8 +50,45 @@ class TrendVC: CodeBaseViewController {
         mainView.collectionView.delegate = self
     }
     
+    func configNavVC() {
+        navigationItem.backButtonDisplayMode = .minimal
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "list.bullet"),
+            style: .plain,
+            target: self,
+            action: #selector(naviBarLeftButtonClicked)
+        )
+        navigationItem.leftBarButtonItem?.tintColor = .link
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "TV",
+            style: .plain,
+            target: self,
+            action: #selector(naviBarRightButtonClicked)
+        )
+        navigationItem.rightBarButtonItem?.tintColor = .link
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.white
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    @objc func naviBarLeftButtonClicked(_ sender: UIBarButtonItem) {
+        print("왼쪽버튼 클릭")
+    }
+    
+    @objc func naviBarRightButtonClicked(_ sender: UIBarButtonItem) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: TvOnTheAirMainVC.identifier) as? TvOnTheAirMainVC else { return }
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private func callTrend(page: Int) {
-        //        indicatorView.startAnimating()
+        mainView.indicatorView.startAnimating()
         APIManager.shared.call(
             endPoint: .trend(type: .movie, period: "week"),
             responseData: Trends.self,
@@ -65,7 +104,7 @@ class TrendVC: CodeBaseViewController {
             print(error)
         } end: { endUrl in
             print(endUrl)
-            //                self.indicatorView.stopAnimating()
+            self.mainView.indicatorView.stopAnimating()
         }
     }
     
