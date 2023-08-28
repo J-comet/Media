@@ -121,5 +121,11 @@ extension TrendVC: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: SegmentMovieVC.identifier) as? SegmentMovieVC else { return }
+        vc.movie = trendList[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
