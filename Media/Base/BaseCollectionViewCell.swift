@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseCollectionViewCell: UICollectionViewCell {
+class BaseCollectionViewCell<T>: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,4 +22,6 @@ class BaseCollectionViewCell: UICollectionViewCell {
     func configureView() {}
     
     func setConstraints() {}
+    
+    func configCell(row: T) {}
 }

@@ -39,11 +39,11 @@ class TrendView: BaseView {
     }
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct TrendVC_PreViews: PreviewProvider {
-    static var previews: some View {
-        TrendVC().showPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//struct TrendVC_PreViews: PreviewProvider {
+//    static var previews: some View {
+//        TrendVC().showPreview()
+//    }
+//}
+//#endif
