@@ -10,8 +10,6 @@ import UIKit
 extension UICollectionViewFlowLayout {
     
     func collectionViewLayout(
-        count: CGFloat,
-        width: CGFloat,
         itemSize: CGSize,
         sectionInset: UIEdgeInsets,
         minimumLineSpacing: CGFloat,

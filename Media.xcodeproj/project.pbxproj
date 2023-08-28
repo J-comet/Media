@@ -19,6 +19,8 @@
 		C01F3AB02A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AAF2A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift */; };
 		C01F3AB22A9C81F300285822 /* TrendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AB12A9C81F300285822 /* TrendCollectionViewCell.swift */; };
 		C01F3AB42A9C822C00285822 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AB32A9C822C00285822 /* BaseCollectionViewCell.swift */; };
+		C01F3AB72A9C886100285822 /* UIViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AB62A9C886100285822 /* UIViewPreview.swift */; };
+		C01F3AB92A9C888E00285822 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AB82A9C888E00285822 /* UIViewController+Extension.swift */; };
 		C02E175A2A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */; };
 		C02E175B2A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */; };
 		C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */; };
@@ -80,6 +82,8 @@
 		C01F3AAF2A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewCollectionVIewFlowLayout+Extension.swift"; sourceTree = "<group>"; };
 		C01F3AB12A9C81F300285822 /* TrendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01F3AB32A9C822C00285822 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		C01F3AB62A9C886100285822 /* UIViewPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewPreview.swift; sourceTree = "<group>"; };
+		C01F3AB82A9C888E00285822 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTvDetailCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -163,6 +167,14 @@
 			path = Trend;
 			sourceTree = "<group>";
 		};
+		C01F3AB52A9C885100285822 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				C01F3AB62A9C886100285822 /* UIViewPreview.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		C032AC7C2A862A0C00592045 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +194,7 @@
 		C032AC872A862A0C00592045 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				C01F3AB52A9C885100285822 /* Util */,
 				C032ACC42A87A57800592045 /* Extension */,
 				C032ACBC2A8763DF00592045 /* Model */,
 				C032ACB22A873D4F00592045 /* Base */,
@@ -290,6 +303,7 @@
 				C032ACE72A8B7D7500592045 /* UserDefaultInfo+Extension.swift */,
 				C02E17962A8FB226001ABEC9 /* UIView+Extension.swift */,
 				C01F3AAF2A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift */,
+				C01F3AB82A9C888E00285822 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -390,6 +404,7 @@
 				C01F3AAC2A9C797700285822 /* TrendView.swift in Sources */,
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
+				C01F3AB72A9C886100285822 /* UIViewPreview.swift in Sources */,
 				C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */,
 				C018F4942A999AAC002565B0 /* IntroVC.swift in Sources */,
 				C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */,
@@ -414,6 +429,7 @@
 				C01F3AA72A9C78B900285822 /* CodeBaseViewController.swift in Sources */,
 				C018F4992A99AE6D002565B0 /* OnboardingNextButton.swift in Sources */,
 				C02E17862A8F6606001ABEC9 /* SegmentMovieVC.swift in Sources */,
+				C01F3AB92A9C888E00285822 /* UIViewController+Extension.swift in Sources */,
 				C01F3AAE2A9C7AEC00285822 /* ConfigurableView.swift in Sources */,
 				C01F3AA92A9C78EE00285822 /* BaseView.swift in Sources */,
 				C02E178A2A8F7335001ABEC9 /* VideoMovie.swift in Sources */,
