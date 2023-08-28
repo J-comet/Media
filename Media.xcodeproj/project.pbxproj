@@ -11,6 +11,11 @@
 		C018F4942A999AAC002565B0 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018F4932A999AAC002565B0 /* IntroVC.swift */; };
 		C018F4972A999F11002565B0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C018F4962A999F11002565B0 /* SnapKit */; };
 		C018F4992A99AE6D002565B0 /* OnboardingNextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018F4982A99AE6D002565B0 /* OnboardingNextButton.swift */; };
+		C01F3AA52A9C782100285822 /* TrendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AA42A9C782100285822 /* TrendVC.swift */; };
+		C01F3AA72A9C78B900285822 /* CodeBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AA62A9C78B900285822 /* CodeBaseViewController.swift */; };
+		C01F3AA92A9C78EE00285822 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AA82A9C78EE00285822 /* BaseView.swift */; };
+		C01F3AAC2A9C797700285822 /* TrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AAB2A9C797700285822 /* TrendView.swift */; };
+		C01F3AAE2A9C7AEC00285822 /* ConfigurableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3AAD2A9C7AEC00285822 /* ConfigurableView.swift */; };
 		C02E175A2A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */; };
 		C02E175B2A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */; };
 		C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */; };
@@ -64,6 +69,11 @@
 		C018F4902A9998AB002565B0 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		C018F4932A999AAC002565B0 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		C018F4982A99AE6D002565B0 /* OnboardingNextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNextButton.swift; sourceTree = "<group>"; };
+		C01F3AA42A9C782100285822 /* TrendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendVC.swift; sourceTree = "<group>"; };
+		C01F3AA62A9C78B900285822 /* CodeBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBaseViewController.swift; sourceTree = "<group>"; };
+		C01F3AA82A9C78EE00285822 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		C01F3AAB2A9C797700285822 /* TrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendView.swift; sourceTree = "<group>"; };
+		C01F3AAD2A9C7AEC00285822 /* ConfigurableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableView.swift; sourceTree = "<group>"; };
 		C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTvDetailCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -137,6 +147,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		C01F3AAA2A9C796100285822 /* Trend */ = {
+			isa = PBXGroup;
+			children = (
+				C01F3AA42A9C782100285822 /* TrendVC.swift */,
+				C01F3AAB2A9C797700285822 /* TrendView.swift */,
+			);
+			path = Trend;
+			sourceTree = "<group>";
+		};
 		C032AC7C2A862A0C00592045 = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +210,7 @@
 			children = (
 				C032ACAD2A87396400592045 /* ReusableViewProtocol.swift */,
 				C032ACBA2A87634E00592045 /* BaseCellProtocol.swift */,
+				C01F3AAD2A9C7AEC00285822 /* ConfigurableView.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -198,6 +218,7 @@
 		C032ACAF2A873BC400592045 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C01F3AAA2A9C796100285822 /* Trend */,
 				C018F4922A9999D0002565B0 /* Onboarding */,
 				C032ACB02A873BEC00592045 /* MainVC.swift */,
 				C032ACC72A87BD6200592045 /* DetailVC.swift */,
@@ -212,6 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				C032ACB32A873D6D00592045 /* BaseViewController.swift */,
+				C01F3AA62A9C78B900285822 /* CodeBaseViewController.swift */,
+				C01F3AA82A9C78EE00285822 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -355,6 +378,7 @@
 			files = (
 				C02E17972A8FB226001ABEC9 /* UIView+Extension.swift in Sources */,
 				C032ACE62A8B7C4300592045 /* APILanguage.swift in Sources */,
+				C01F3AAC2A9C797700285822 /* TrendView.swift in Sources */,
 				C032AC892A862A0C00592045 /* AppDelegate.swift in Sources */,
 				C032ACBB2A87634E00592045 /* BaseCellProtocol.swift in Sources */,
 				C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */,
@@ -364,6 +388,7 @@
 				C018F4912A9998AB002565B0 /* OnboardingVC.swift in Sources */,
 				C052F1792A8CF30D0008C7A6 /* TvOnTheAir.swift in Sources */,
 				C02E17942A8FAF6F001ABEC9 /* HeaderSimilarView.swift in Sources */,
+				C01F3AA52A9C782100285822 /* TrendVC.swift in Sources */,
 				C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */,
 				C052F1772A8CEC470008C7A6 /* APIType.swift in Sources */,
 				C032ACB12A873BEC00592045 /* MainVC.swift in Sources */,
@@ -376,8 +401,11 @@
 				C032ACA82A86301300592045 /* APIKey.swift in Sources */,
 				C032ACE42A8B693400592045 /* Genre.swift in Sources */,
 				C032ACE22A8B4EAB00592045 /* EndPoint.swift in Sources */,
+				C01F3AA72A9C78B900285822 /* CodeBaseViewController.swift in Sources */,
 				C018F4992A99AE6D002565B0 /* OnboardingNextButton.swift in Sources */,
 				C02E17862A8F6606001ABEC9 /* SegmentMovieVC.swift in Sources */,
+				C01F3AAE2A9C7AEC00285822 /* ConfigurableView.swift in Sources */,
+				C01F3AA92A9C78EE00285822 /* BaseView.swift in Sources */,
 				C02E178A2A8F7335001ABEC9 /* VideoMovie.swift in Sources */,
 				C032AC8B2A862A0C00592045 /* SceneDelegate.swift in Sources */,
 				C032ACB42A873D6D00592045 /* BaseViewController.swift in Sources */,

@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = OnboardingVC()
             window?.makeKeyAndVisible()
         } else {
-            let vc = sb.instantiateViewController(withIdentifier: MainVC.identifier) as? MainVC
+            let vc = sb.instantiateViewController(withIdentifier: TrendVC.identifier) as? TrendVC
+//            let vc = sb.instantiateViewController(withIdentifier: MainVC.identifier) as? MainVC
             if let vc {
                 window?.rootViewController = UINavigationController(rootViewController: vc)
                 window?.makeKeyAndVisible()
