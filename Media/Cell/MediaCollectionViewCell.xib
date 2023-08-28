@@ -110,7 +110,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17O-BM-obZ">
-                                        <rect key="frame" x="61.333333333333371" y="280.66666666666669" width="419.66666666666663" height="21"/>
+                                        <rect key="frame" x="61.333333333333343" y="280.66666666666669" width="419.66666666666663" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
