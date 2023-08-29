@@ -25,6 +25,7 @@ class ProfileEditVC: CodeBaseViewController {
             title = "\(menu.type.title)"
             mainView.guideLabel.text = menu.type.title
             mainView.editTextField.placeholder = menu.type.placeHolder
+            mainView.editTextField.text = menu.content.isEmpty ? nil : menu.content
         }
     
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -45,7 +46,23 @@ class ProfileEditVC: CodeBaseViewController {
         if input.count < 1 {
             print("입력 값 없음")
         } else {
-            print("굳")
+            guard let menu else { return }
+            switch menu.type {
+            case .name:
+                NotificationCenter.default.post(name: .name, object: nil, userInfo: ["name" : ProfileMenu(type: menu.type, content: input)])
+            case .username:
+                NotificationCenter.default.post(name: .username, object: nil, userInfo: ["username" : ProfileMenu(type: menu.type, content: input)])
+            case .genderPronoun:
+                print("genderPronoun")
+            case .introduce:
+                print("introduce")
+            case .link:
+                print("link")
+            case .gender:
+                print("gender")
+            }
+            
+            navigationController?.popViewController(animated: true)
         }
     }
 }

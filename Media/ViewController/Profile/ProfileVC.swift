@@ -7,26 +7,59 @@
 
 import UIKit
 
-class ProfileVC: BaseViewController {
+class ProfileVC: CodeBaseViewController {
     
     private let mainView = ProfileView()
     
     override func loadView() {
         view = mainView
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getEditDataNotificationObserver),
+            name: .name,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(getEditDataNotificationObserver),
+            name: .username,
+            object: nil
+        )
+    }
+    
+    @objc func getEditDataNotificationObserver(notification: NSNotification) {
+        
+        if let menu = notification.userInfo?["name"] as? ProfileMenu {
+            ProfileMenuInfo.list.enumerated().forEach { idx, item in
+                if item.type == menu.type {
+                    ProfileMenuInfo.list[idx] = menu
+                }
+            }
+            mainView.collectionView.reloadData()
+        }
+        
+        if let menu = notification.userInfo?["username"] as? ProfileMenu {
+            ProfileMenuInfo.list.enumerated().forEach { idx, item in
+                if item.type == menu.type {
+                    ProfileMenuInfo.list[idx] = menu
+                }
+            }
+            mainView.collectionView.reloadData()
+        }
+    }
 
-    override func configNavVC() {
+    private func configNavVC() {
         navigationItem.title = "프로필"
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(
-//            title: "수정",
-//            style: .plain,
-//            target: self,
-//            action: #selector(editProfileButtonClicked)
-//        )
         navigationItem.rightBarButtonItem?.tintColor = .link
     }
     
-    override func configVC() {
+    override func configureView() {
         navigationItem.backButtonDisplayMode = .minimal
         mainView.collectionView.dataSource = self
         mainView.collectionView.delegate = self

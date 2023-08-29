@@ -30,6 +30,7 @@
 		C01F3B112A9E04C000285822 /* ProfileMenuInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3B102A9E04C000285822 /* ProfileMenuInfo.swift */; };
 		C01F3B132A9E094900285822 /* ProfileEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3B122A9E094900285822 /* ProfileEditVC.swift */; };
 		C01F3B162A9E0B0D00285822 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3B152A9E0B0D00285822 /* ProfileEditView.swift */; };
+		C01F3B182A9E168300285822 /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F3B172A9E168300285822 /* Notification+Extension.swift */; };
 		C02E175A2A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */; };
 		C02E175B2A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */; };
 		C02E175E2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */; };
@@ -102,6 +103,7 @@
 		C01F3B102A9E04C000285822 /* ProfileMenuInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMenuInfo.swift; sourceTree = "<group>"; };
 		C01F3B122A9E094900285822 /* ProfileEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditVC.swift; sourceTree = "<group>"; };
 		C01F3B152A9E0B0D00285822 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		C01F3B172A9E168300285822 /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		C02E17582A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		C02E17592A8D265D001ABEC9 /* TvDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TvDetailCollectionViewCell.xib; sourceTree = "<group>"; };
 		C02E175C2A8D29F2001ABEC9 /* HeaderTvDetailCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTvDetailCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 				C02E17962A8FB226001ABEC9 /* UIView+Extension.swift */,
 				C01F3AAF2A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift */,
 				C01F3AB82A9C888E00285822 /* UIViewController+Extension.swift */,
+				C01F3B172A9E168300285822 /* Notification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				C032ACB82A874CAE00592045 /* MediaCollectionViewCell.swift in Sources */,
 				C01F3B0F2A9E011500285822 /* ProfileMenu.swift in Sources */,
 				C01F3AB02A9C7C3400285822 /* UIViewCollectionVIewFlowLayout+Extension.swift in Sources */,
+				C01F3B182A9E168300285822 /* Notification+Extension.swift in Sources */,
 				C052F17E2A8CF5A30008C7A6 /* TVOnTheAirCollectionViewCell.swift in Sources */,
 				C01F3AB42A9C822C00285822 /* BaseCollectionViewCell.swift in Sources */,
 				C02E175A2A8D265D001ABEC9 /* TvDetailCollectionViewCell.swift in Sources */,
