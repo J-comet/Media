@@ -7,8 +7,8 @@
 
 import UIKit
 
-public protocol ConfigurableView { }
-public extension ConfigurableView {
+protocol ConfigurableView { }
+extension ConfigurableView {
     @discardableResult
     func setup(_ block: (_ view: Self) -> Void) -> Self {
         block(self)

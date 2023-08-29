@@ -17,6 +17,7 @@ class ProfileEditVC: CodeBaseViewController {
     var menu: ProfileMenu?
     
     var delegate: ProfileEditVCDelegate?
+    var completionHandler: ((ProfileMenu) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +64,9 @@ class ProfileEditVC: CodeBaseViewController {
             case .introduce:
                 delegate?.receiveProfileData(profileMenu: ProfileMenu(type: menu.type, content: input))
             case .link:
-                print("link")
+                completionHandler?(ProfileMenu(type: menu.type, content: input))
             case .gender:
-                print("gender")
+                completionHandler?(ProfileMenu(type: menu.type, content: input))
             }
             
             navigationController?.popViewController(animated: true)

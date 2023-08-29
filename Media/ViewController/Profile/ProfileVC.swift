@@ -92,6 +92,18 @@ extension ProfileVC: UICollectionViewDelegate, UICollectionViewDataSource {
             vc.delegate = self
         }
         
+        // closure
+        if row.type == .link || row.type == .gender {
+            vc.completionHandler = { menu in
+                ProfileMenuInfo.list.enumerated().forEach { idx, item in
+                    if item.type == menu.type {
+                        ProfileMenuInfo.list[idx] = menu
+                    }
+                }
+                self.mainView.collectionView.reloadData()
+            }
+        }
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     
