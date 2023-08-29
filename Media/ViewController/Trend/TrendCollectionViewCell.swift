@@ -189,9 +189,11 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
         
         titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(thumbImageView.snp.bottom).offset(6)
             $0.leading.equalToSuperview().inset(6)
+            $0.height.equalTo(24)
         }
         
         originTitleLabel.snp.makeConstraints {
@@ -204,6 +206,7 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(6)
+            $0.height.equalTo(18)
         }
         
         lineView.snp.makeConstraints {

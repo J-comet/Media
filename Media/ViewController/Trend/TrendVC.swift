@@ -9,12 +9,12 @@ import UIKit
 
 class TrendVC: CodeBaseViewController {
     
-    let mainView = TrendView()
+    private let mainView = TrendView()
     
-    var trendList: [TrendsResult] = []
-    var page = 1
-    var totalPage = 1
-    var movieGenre = UserDefaults.genre
+    private var trendList: [TrendsResult] = []
+    private var page = 1
+    private var totalPage = 1
+    private var movieGenre = UserDefaults.genre
     
     override func loadView() {
         view = mainView
@@ -50,11 +50,11 @@ class TrendVC: CodeBaseViewController {
         mainView.collectionView.delegate = self
     }
     
-    func configNavVC() {
+    private func configNavVC() {
         navigationItem.backButtonDisplayMode = .minimal
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "list.bullet"),
+            image: UIImage(systemName: "person.circle"),
             style: .plain,
             target: self,
             action: #selector(naviBarLeftButtonClicked)
@@ -69,16 +69,17 @@ class TrendVC: CodeBaseViewController {
         )
         navigationItem.rightBarButtonItem?.tintColor = .link
         
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.white
-
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.backgroundColor = UIColor.white
+//
+//        navigationController?.navigationBar.standardAppearance = appearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     @objc func naviBarLeftButtonClicked(_ sender: UIBarButtonItem) {
-        print("왼쪽버튼 클릭")
+        let vc = ProfileVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func naviBarRightButtonClicked(_ sender: UIBarButtonItem) {
@@ -123,9 +124,18 @@ extension TrendVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        guard let vc = sb.instantiateViewController(withIdentifier: SegmentMovieVC.identifier) as? SegmentMovieVC else { return }
-        vc.movie = trendList[indexPath.row]
+        guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else { return }
+        vc.trendResult = trendList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+struct TrendVC_PreViews: PreviewProvider {
+    static var previews: some View {
+        TrendVC().showPreview()
+    }
+}
+#endif

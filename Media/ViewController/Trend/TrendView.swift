@@ -38,7 +38,7 @@ class TrendView: BaseView {
         }
     }
     
-    func collectionViewLayout() -> UICollectionViewFlowLayout {
+    private func collectionViewLayout() -> UICollectionViewFlowLayout {
         let count: CGFloat = 1
         let width = UIScreen.main.bounds.width
         return UICollectionViewFlowLayout().collectionViewLayout(
