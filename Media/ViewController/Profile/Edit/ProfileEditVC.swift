@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol ProfileEditVCDelegate {
+    func receiveProfileData(profileMenu: ProfileMenu)
+}
+
 class ProfileEditVC: CodeBaseViewController {
 
     let mainView = ProfileEditView()
     var menu: ProfileMenu?
+    
+    var delegate: ProfileEditVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +59,9 @@ class ProfileEditVC: CodeBaseViewController {
             case .username:
                 NotificationCenter.default.post(name: .username, object: nil, userInfo: ["username" : ProfileMenu(type: menu.type, content: input)])
             case .genderPronoun:
-                print("genderPronoun")
+                delegate?.receiveProfileData(profileMenu: ProfileMenu(type: menu.type, content: input))
             case .introduce:
-                print("introduce")
+                delegate?.receiveProfileData(profileMenu: ProfileMenu(type: menu.type, content: input))
             case .link:
                 print("link")
             case .gender:

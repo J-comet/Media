@@ -52,5 +52,6 @@ class ProfileMenuCollectionViewCell: BaseCollectionViewCell<ProfileMenu> {
     override func configCell(row: ProfileMenu) {
         titleLabel.text = row.type.title
         contentLabel.text = row.content.isEmpty ? row.type.placeHolder : row.content
+        contentLabel.textColor = row.content.isEmpty ? .lightGray : .black
     }
 }

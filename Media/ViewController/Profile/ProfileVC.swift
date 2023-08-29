@@ -17,6 +17,7 @@ class ProfileVC: CodeBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configNavVC()
         
         NotificationCenter.default.addObserver(
             self,
@@ -82,9 +83,29 @@ extension ProfileVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let row = ProfileMenuInfo.list[indexPath.row]
         let vc = ProfileEditVC()
-        vc.menu = ProfileMenuInfo.list[indexPath.row]
+        vc.menu = row
+        
+        // delegate
+        if row.type == .genderPronoun || row.type == .introduce {
+            vc.delegate = self
+        }
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension ProfileVC: ProfileEditVCDelegate {
+    
+    func receiveProfileData(profileMenu: ProfileMenu) {
+        print(profileMenu)
+        ProfileMenuInfo.list.enumerated().forEach { idx, item in
+            if item.type == profileMenu.type {
+                ProfileMenuInfo.list[idx] = profileMenu
+            }
+        }
+        mainView.collectionView.reloadData()
+    }
 }
