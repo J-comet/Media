@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TvOnTheAirMainVC: BaseViewController {
+class TvOnTheAirMainVC: BaseStoryboardViewController {
     
     @IBOutlet var tvCollectionView: UICollectionView!
     @IBOutlet var indicatorView: UIActivityIndicatorView!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailVC: BaseViewController {
+class DetailVC: BaseStoryboardViewController {
 
     @IBOutlet var tableHeaderContainerView: UIView!
     @IBOutlet var backdropImageView: UIImageView!

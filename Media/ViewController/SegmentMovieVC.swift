@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class SegmentMovieVC: BaseViewController {
+class SegmentMovieVC: BaseStoryboardViewController {
     
     @IBOutlet var indicatorView: UIActivityIndicatorView!
     @IBOutlet var moviewCollectionView: UICollectionView!

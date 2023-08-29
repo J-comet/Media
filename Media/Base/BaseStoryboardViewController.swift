@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController  {
+class BaseStoryboardViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()

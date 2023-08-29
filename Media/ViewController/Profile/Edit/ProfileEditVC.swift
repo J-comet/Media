@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import BaseFrameWork
 
 protocol ProfileEditVCDelegate {
     func receiveProfileData(profileMenu: ProfileMenu)
 }
 
-class ProfileEditVC: CodeBaseViewController {
+class ProfileEditVC: BaseViewController {
 
     let mainView = ProfileEditView()
     var menu: ProfileMenu?
@@ -51,7 +52,7 @@ class ProfileEditVC: CodeBaseViewController {
         }
         
         if input.count < 1 {
-            print("입력 값 없음")
+            showAlert(title: "오류", msg: "입력해주세요", ok: "확인")
         } else {
             guard let menu else { return }
             switch menu.type {

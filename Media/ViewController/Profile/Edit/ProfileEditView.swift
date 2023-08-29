@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BaseFrameWork
 
 class ProfileEditView: BaseView {
     

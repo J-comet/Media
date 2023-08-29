@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class MainVC: BaseViewController {
+class MainVC: BaseStoryboardViewController {
    
     @IBOutlet var mediaCollectionView: UICollectionView!
     @IBOutlet var indicatorView: UIActivityIndicatorView!

@@ -6,13 +6,22 @@
 //
 
 import UIKit
+import BaseFrameWork
+import SnapKit
 
 class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     
-    let dateLabel = UILabel().setup { view in
+//    let dateLabel = UILabel().setup { view in
+//        view.font = .systemFont(ofSize: 11, weight: .light)
+//        view.textColor = .darkGray
+//    }
+    
+    let dateLabel = {
+        let view = UILabel()
         view.font = .systemFont(ofSize: 11, weight: .light)
         view.textColor = .darkGray
-    }
+        return view
+    }()
     
     let typeLabel = UILabel().setup { view in
         view.font = .boldSystemFont(ofSize: 16)

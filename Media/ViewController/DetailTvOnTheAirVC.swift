@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTvOnTheAirVC: BaseViewController {
+class DetailTvOnTheAirVC: BaseStoryboardViewController {
 
     @IBOutlet var mainThumbImageView: UIImageView!
     @IBOutlet var detailCollectionView: UICollectionView!

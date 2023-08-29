@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import BaseFrameWork
 
-class TrendVC: CodeBaseViewController {
+class TrendVC: BaseViewController {
     
     private let mainView = TrendView()
     
@@ -131,11 +132,11 @@ extension TrendVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
 }
 
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-struct TrendVC_PreViews: PreviewProvider {
-    static var previews: some View {
-        TrendVC().showPreview()
-    }
-}
-#endif
+//#if canImport(SwiftUI) && DEBUG
+//import SwiftUI
+//struct TrendVC_PreViews: PreviewProvider {
+//    static var previews: some View {
+//        TrendVC().showPreview()
+//    }
+//}
+//#endif

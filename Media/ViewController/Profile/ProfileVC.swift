@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import BaseFrameWork
 
-class ProfileVC: CodeBaseViewController {
+class ProfileVC: BaseViewController {
     
     private let mainView = ProfileView()
     
