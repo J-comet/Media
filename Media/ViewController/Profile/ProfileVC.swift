@@ -12,6 +12,8 @@ class ProfileVC: BaseViewController {
     
     private let mainView = ProfileView()
     
+    override var isShowDeinit: Bool { true }
+    
     override func loadView() {
         view = mainView
     }

@@ -10,6 +10,8 @@ import BaseFrameWork
 
 class ProfileEditView: BaseView {
     
+    override var isShowDeinit: Bool { true }
+    
     let guideLabel = UILabel().setup { view in
         view.font = .boldSystemFont(ofSize: 16)
         view.textColor = .darkGray

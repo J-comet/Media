@@ -14,6 +14,8 @@ protocol ProfileEditVCDelegate {
 
 class ProfileEditVC: BaseViewController {
 
+    override var isShowDeinit: Bool { true }
+    
     let mainView = ProfileEditView()
     var menu: ProfileMenu?
     
