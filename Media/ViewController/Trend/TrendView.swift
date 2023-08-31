@@ -10,11 +10,16 @@ import BaseFrameWork
 
 class TrendView: BaseView {
     
+    weak var delegate: TrendViewProtocol?
+    
     lazy var collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: self.collectionViewLayout()
     ).setup { view in
         view.showsVerticalScrollIndicator = false
+        view.dataSource = self
+        view.delegate = self
+        view.prefetchDataSource = self
         view.register(TrendCollectionViewCell.self, forCellWithReuseIdentifier: TrendCollectionViewCell.identifier)
     }
     
@@ -48,6 +53,27 @@ class TrendView: BaseView {
             minimumLineSpacing: 20,
             minimumInteritemSpacing: 0)
     }
+    
+}
+
+
+extension TrendView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return delegate?.numberOfItemsInSection() ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return delegate?.cellForItemAt(collectionView, cellForItemAt: indexPath) ?? UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectItemAt(indexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        delegate?.prefetchItemsAt(indexPaths: indexPaths)
+    }
+    
 }
 
 //#if canImport(SwiftUI) && DEBUG

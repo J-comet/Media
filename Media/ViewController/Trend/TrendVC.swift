@@ -8,16 +8,27 @@
 import UIKit
 import BaseFrameWork
 
+protocol TrendViewProtocol: AnyObject {
+    func numberOfItemsInSection() -> Int
+    func cellForItemAt(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    func didSelectItemAt(indexPath: IndexPath)
+    func prefetchItemsAt(indexPaths: [IndexPath])
+}
+
 class TrendVC: BaseViewController {
     
     private let mainView = TrendView()
-    
-    private var trendList: [TrendsResult] = []
+    private lazy var trendList: [TrendsResult] = [] {
+        didSet {
+            self.mainView.collectionView.reloadData()
+        }
+    }
     private var page = 1
     private var totalPage = 1
     private var movieGenre = UserDefaults.genre
     
     override func loadView() {
+        mainView.delegate = self
         view = mainView
     }
     
@@ -47,8 +58,7 @@ class TrendVC: BaseViewController {
     }
     
     override func configureView() {
-        mainView.collectionView.dataSource = self
-        mainView.collectionView.delegate = self
+        
     }
     
     private func configNavVC() {
@@ -70,12 +80,12 @@ class TrendVC: BaseViewController {
         )
         navigationItem.rightBarButtonItem?.tintColor = .link
         
-//        let appearance = UINavigationBarAppearance()
-//        appearance.configureWithOpaqueBackground()
-//        appearance.backgroundColor = UIColor.white
-//
-//        navigationController?.navigationBar.standardAppearance = appearance
-//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        //        let appearance = UINavigationBarAppearance()
+        //        appearance.configureWithOpaqueBackground()
+        //        appearance.backgroundColor = UIColor.white
+        //
+        //        navigationController?.navigationBar.standardAppearance = appearance
+        //        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     @objc func naviBarLeftButtonClicked(_ sender: UIBarButtonItem) {
@@ -101,7 +111,7 @@ class TrendVC: BaseViewController {
         ) { response in
             self.totalPage = response.totalPages
             self.trendList.append(contentsOf: response.results)
-            self.mainView.collectionView.reloadData()
+//            self.mainView.collectionView.reloadData()
         } failure: { error in
             print(error)
         } end: { endUrl in
@@ -112,25 +122,36 @@ class TrendVC: BaseViewController {
     
 }
 
-extension TrendVC: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension TrendVC: TrendViewProtocol {
+    
+    func numberOfItemsInSection() -> Int {
         return trendList.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForItemAt(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendCollectionViewCell.identifier, for: indexPath) as? TrendCollectionViewCell else { return UICollectionViewCell() }
         cell.configCell(row: trendList[indexPath.row])
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func didSelectItemAt(indexPath: IndexPath) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = sb.instantiateViewController(withIdentifier: DetailVC.identifier) as? DetailVC else { return }
         vc.trendResult = trendList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func prefetchItemsAt(indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if trendList.count - 1 == indexPath.row && page < totalPage {
+                page += 1
+                callTrend(page: page)
+            }
+        }
+    }
 }
+
+
 
 //#if canImport(SwiftUI) && DEBUG
 //import SwiftUI
