@@ -94,6 +94,7 @@ extension ProfileVC: UICollectionViewDelegate, UICollectionViewDataSource {
         }
         
         // closure
+        // 강한참조 vs 약한참조??
         if row.type == .link || row.type == .gender {
             vc.completionHandler = { menu in
                 ProfileMenuInfo.list.enumerated().forEach { idx, item in
