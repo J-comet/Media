@@ -121,7 +121,7 @@ class TrendVC: BaseViewController {
     private func callTrend(type: APIType, page: Int) {
         mainView.indicatorView.startAnimating()
         APIManager.shared.call(
-            endPoint: .trend(type: type, period: "week"),
+            endPoint: .trend(type: .person, period: "week"),
             responseData: Trends.self,
             parameterDic: [
                 "language":APILanguage.korea.rawValue,
@@ -153,11 +153,15 @@ extension TrendVC: TrendViewProtocol {
         switch row.mediaType {
         case APIType.movie.rawValue:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieTrendCollectionViewCell.identifier, for: indexPath) as? MovieTrendCollectionViewCell else { return UICollectionViewCell() }
-            cell.configCell(row: trendList[indexPath.row])
+            cell.configCell(row: row)
             return cell
         case APIType.tv.rawValue:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TvTrendCollectionViewCell.identifier, for: indexPath) as? TvTrendCollectionViewCell else { return UICollectionViewCell() }
-            cell.configCell(row: trendList[indexPath.row])
+            cell.configCell(row: row)
+            return cell
+        case APIType.person.rawValue:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PeopleTrendCollectionViewCell.identifier, for: indexPath) as? PeopleTrendCollectionViewCell else { return UICollectionViewCell() }
+            cell.configCell(row: row)
             return cell
         default:
             return UICollectionViewCell()

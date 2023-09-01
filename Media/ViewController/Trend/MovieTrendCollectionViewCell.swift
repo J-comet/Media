@@ -119,7 +119,7 @@ class MovieTrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
         originTitleLabel.text = row.getOriginTitle()
         contentLabel.text = row.overview
         
-        let url = URL(string: URL.getImg(imgaePath: row.backdropPath))
+        let url = URL(string: URL.getImg(imgaePath: row.backdropPath ?? ""))
         if let url {
             thumbImageView.kf.setImage(
                 with: url,

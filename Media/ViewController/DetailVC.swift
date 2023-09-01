@@ -59,13 +59,13 @@ class DetailVC: BaseStoryboardViewController {
         castTableView.layoutIfNeeded()
     }
     
-    func callRequest(id: String) {
+    func callRequest(type: APIType, id: String) {
         indicatorView.startAnimating()
         
 //        print("id = ",id)
         
         APIManager.shared.call(
-            endPoint: .cast(type: .movie, id: id),
+            endPoint: .cast(type: type, id: id),
             responseData: Casts.self) { response in
                 self.castList.append(contentsOf: response.cast)
             } failure: { error in
@@ -107,15 +107,15 @@ class DetailVC: BaseStoryboardViewController {
         
         guard let trendResult else { return }
         
-        callRequest(id: "\(trendResult.id)")
+        callRequest(type: APIType(rawValue: trendResult.mediaType)!, id: "\(trendResult.id)")
 
-        titleLabel.text = trendResult.title
+        titleLabel.text = trendResult.getTitle()
         contentLabel.text = trendResult.overview
         
         moreButton.isHidden = contentLabel.countLines() >= 3 ? false : true
         
-        let backdropUrl = URL(string: URL.imgURL + trendResult.backdropPath)
-        let posterUrl = URL(string: URL.imgURL + trendResult.posterPath)
+        let backdropUrl = URL(string: URL.imgURL + (trendResult.backdropPath ?? "")) ?? nil
+        let posterUrl = URL(string: URL.imgURL + (trendResult.posterPath ?? "")) ?? nil
     
         if let backdropUrl, let posterUrl {
             DispatchQueue.global().async {

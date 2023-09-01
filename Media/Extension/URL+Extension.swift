@@ -10,6 +10,7 @@ import Foundation
 extension URL {
     static let baseURL = "https://api.themoviedb.org/3/"
     static let imgURL = "https://image.tmdb.org/t/p/w400/"
+    static let peopleImgURL = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/"
     static let youtubeURL = "https://www.youtube.com/watch?v="
     
     static func makeEndPointString(_ endpoint: String) -> String {
@@ -22,5 +23,9 @@ extension URL {
     
     static func getYoutubeLink(key: String) -> String {
         return youtubeURL + key
+    }
+    
+    static func getProfileImg(profilePath: String) -> String {
+        return peopleImgURL + profilePath
     }
 }

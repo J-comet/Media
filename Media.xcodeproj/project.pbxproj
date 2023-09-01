@@ -76,6 +76,7 @@
 		C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1802A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift */; };
 		C052F1832A8D070A0008C7A6 /* TvDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C052F1822A8D070A0008C7A6 /* TvDetail.swift */; };
 		C05C44432AA1BAA800C4CE69 /* TvTrendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05C44422AA1BAA800C4CE69 /* TvTrendCollectionViewCell.swift */; };
+		C05C44482AA1DC4800C4CE69 /* PeopleTrendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05C44472AA1DC4800C4CE69 /* PeopleTrendCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		C052F1802A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTvOnTheAirVC.swift; sourceTree = "<group>"; };
 		C052F1822A8D070A0008C7A6 /* TvDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvDetail.swift; sourceTree = "<group>"; };
 		C05C44422AA1BAA800C4CE69 /* TvTrendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvTrendCollectionViewCell.swift; sourceTree = "<group>"; };
+		C05C44472AA1DC4800C4CE69 /* PeopleTrendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTrendCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 				C01F3AAB2A9C797700285822 /* TrendView.swift */,
 				C01F3AB12A9C81F300285822 /* MovieTrendCollectionViewCell.swift */,
 				C05C44422AA1BAA800C4CE69 /* TvTrendCollectionViewCell.swift */,
+				C05C44472AA1DC4800C4CE69 /* PeopleTrendCollectionViewCell.swift */,
 			);
 			path = Trend;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				C018F4942A999AAC002565B0 /* IntroVC.swift in Sources */,
 				C052F1812A8CFD330008C7A6 /* DetailTvOnTheAirVC.swift in Sources */,
 				C01F3AB22A9C81F300285822 /* MovieTrendCollectionViewCell.swift in Sources */,
+				C05C44482AA1DC4800C4CE69 /* PeopleTrendCollectionViewCell.swift in Sources */,
 				C032ACCD2A8892F400592045 /* CastTableViewCell.swift in Sources */,
 				C018F4912A9998AB002565B0 /* OnboardingVC.swift in Sources */,
 				C052F1792A8CF30D0008C7A6 /* TvOnTheAir.swift in Sources */,

@@ -8,7 +8,8 @@
 import Foundation
 
 enum APIType: String {
+    case all
     case movie
     case tv
-    case all
+    case person
 }

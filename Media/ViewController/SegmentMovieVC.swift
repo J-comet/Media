@@ -172,11 +172,11 @@ extension SegmentMovieVC: UICollectionViewDelegate, UICollectionViewDataSource, 
         // 거의 비슷한 데이터를 copy 하는 느낌? 같은 구조체였으면..
         let currentMovie = TrendsResult(
             backdropPath: row.backdropPath ?? "", id: row.id,
-            title: row.title, name: "", originalName: "", originalLanguage: row.originalLanguage,
+            title: row.title, name: "", originalName: "",
             originalTitle: row.originalTitle, overview: row.overview,
             posterPath: row.posterPath ?? "", mediaType: "movie", genreIDS: row.genreIDS,
             popularity: row.popularity, releaseDate: row.releaseDate, firstAirDate: "",
-        voteAverage: row.voteAverage, voteCount: row.voteCount
+            voteAverage: row.voteAverage, voteCount: row.voteCount, profilePath: "", knownFor: nil
         )
         similarList.removeAll()
         page = 1

@@ -18,7 +18,7 @@ struct Trends: Codable {
     let page: Int
     let results: [TrendsResult]
     let totalPages, totalResults: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalPages = "total_pages"
@@ -28,26 +28,28 @@ struct Trends: Codable {
 
 // MARK: - Result
 struct TrendsResult: Codable {
-    let backdropPath: String
+    let backdropPath: String?
     let id: Int
     let title: String?
     let name: String?
     let originalName: String?
-    let originalLanguage: String
     let originalTitle: String?
-    let overview, posterPath: String
+    let overview: String?
+    let posterPath: String?
     let mediaType: String
-    let genreIDS: [Int]
+    let genreIDS: [Int]?
     let popularity: Double
     let releaseDate: String?
     let firstAirDate: String?
-    let voteAverage: Double
-    let voteCount: Int
-
+    let voteAverage: Double?
+    let voteCount: Int?
+    
+    let profilePath: String?
+    let knownFor: [PeopleKnownFor]?
+    
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case id, title, name
-        case originalLanguage = "original_language"
         case originalTitle = "original_title"
         case originalName = "original_name"
         case overview
@@ -59,6 +61,8 @@ struct TrendsResult: Codable {
         case firstAirDate = "first_air_date"
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+        case profilePath = "profile_path"
+        case knownFor = "known_for"
     }
     
     var genresInfo: [Genre] {
@@ -71,11 +75,13 @@ struct TrendsResult: Codable {
     
     func getGenre() -> String {
         var result = ""
-        for genre in genresInfo {
-            for id in genreIDS {
-                if id == genre.id {
-                    result.append("#\(genre.name) ")
-                    break
+        if let genreIDS {
+            for genre in genresInfo {
+                for id in genreIDS {
+                    if id == genre.id {
+                        result.append("#\(genre.name) ")
+                        break
+                    }
                 }
             }
         }
@@ -103,7 +109,7 @@ struct TrendsResult: Codable {
     }
     
     func getVoteAverage() -> String {
-        return "\(round(voteAverage * pow(10, 2)) / pow(10, 2))"
+        return "\(round((voteAverage ?? 0) * pow(10, 2)) / pow(10, 2))"
     }
     
     func getDate() -> String {
@@ -120,8 +126,19 @@ struct TrendsResult: Codable {
             dateFormatter.dateFormat = "MM/dd/YYYY"
             return dateFormatter.string(from: date!)
         }
-        
         return ""
     }
+    
+    func getKnownFor() -> String {
+        var result = ""
+        knownFor?.forEach({ item in
+            result.append("\n#\(item.title)")
+        })
+        return "출연작품" + result
+    }
+}
+
+struct PeopleKnownFor: Codable {
+    let title: String
 }
 

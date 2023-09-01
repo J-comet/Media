@@ -20,6 +20,7 @@ class TrendView: BaseView {
         view.dataSource = self
         view.delegate = self
         view.prefetchDataSource = self
+        view.register(PeopleTrendCollectionViewCell.self, forCellWithReuseIdentifier: PeopleTrendCollectionViewCell.identifier)
         view.register(MovieTrendCollectionViewCell.self, forCellWithReuseIdentifier: MovieTrendCollectionViewCell.identifier)
         view.register(TvTrendCollectionViewCell.self, forCellWithReuseIdentifier: TvTrendCollectionViewCell.identifier)
     }

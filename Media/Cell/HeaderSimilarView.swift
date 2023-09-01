@@ -34,7 +34,7 @@ class HeaderSimilarView: UICollectionReusableView {
     
     func configView(row: TrendsResult, videoMovie: VideoMovie) {
         backdropImageView.kf.setImage(
-            with: URL(string: URL.getImg(imgaePath: row.backdropPath)),
+            with: URL(string: URL.getImg(imgaePath: row.backdropPath ?? "")),
           placeholder: nil,
           options: [
             .transition(.fade(0.1))
