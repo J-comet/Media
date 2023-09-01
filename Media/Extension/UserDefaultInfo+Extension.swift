@@ -44,12 +44,16 @@ extension UserDefaults {
     @UserDefault(key: UserDefaultsKey.isLaunched.rawValue, defaultValue: true)
     static var isLaunched: Bool
     
-    @UserDefaultStruct(key: UserDefaultsKey.genre.rawValue, defaultValue: Array<Genre>())
-    static var genre: [Genre]
+    @UserDefaultStruct(key: UserDefaultsKey.movieGenre.rawValue, defaultValue: Array<Genre>())
+    static var movieGenre: [Genre]
+    
+    @UserDefaultStruct(key: UserDefaultsKey.tvGenre.rawValue, defaultValue: Array<Genre>())
+    static var tvGenre: [Genre]
 }
 
 
 enum UserDefaultsKey: String {
-    case genre
+    case movieGenre
+    case tvGenre
     case isLaunched
 }

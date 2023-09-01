@@ -43,6 +43,7 @@ class APIManager {
                     success(data)
                     requestStatus = "성공"
                 case .failure(let error):
+                    print(error)
                     failure(error.errorDescription ?? "오류")
                     requestStatus = "실패"
                 }
@@ -79,6 +80,7 @@ class APIManager {
                     success(data)
                     requestStatus = "성공"
                 case .failure(let error):
+                    print(error)
                     failure(error.errorDescription ?? "오류")
                     requestStatus = "실패"
                 }

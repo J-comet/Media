@@ -20,7 +20,8 @@ class TrendView: BaseView {
         view.dataSource = self
         view.delegate = self
         view.prefetchDataSource = self
-        view.register(TrendCollectionViewCell.self, forCellWithReuseIdentifier: TrendCollectionViewCell.identifier)
+        view.register(MovieTrendCollectionViewCell.self, forCellWithReuseIdentifier: MovieTrendCollectionViewCell.identifier)
+        view.register(TvTrendCollectionViewCell.self, forCellWithReuseIdentifier: TvTrendCollectionViewCell.identifier)
     }
     
     let indicatorView = UIActivityIndicatorView().setup { view in

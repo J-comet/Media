@@ -8,7 +8,8 @@
 import Foundation
 
 enum Endpoint {
-    case genre
+    case movieGenre
+    case tvGenre
     case trend(type: APIType, period: String)
     case cast(type: APIType, id: String)
     case tvOnTheAir
@@ -20,9 +21,10 @@ enum Endpoint {
     
     var requestURL: String {
         switch self {
-        case .genre:
+        case .movieGenre:
             return URL.makeEndPointString("genre/movie/list")
-            
+        case .tvGenre:
+            return URL.makeEndPointString("genre/tv/list")
         case .trend(type: let type, period: let period):
             return URL.makeEndPointString("trending/\(type.rawValue)/\(period)")
             

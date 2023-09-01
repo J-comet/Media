@@ -10,4 +10,5 @@ import Foundation
 enum APIType: String {
     case movie
     case tv
+    case all
 }

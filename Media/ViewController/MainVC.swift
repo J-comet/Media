@@ -21,7 +21,7 @@ class MainVC: BaseStoryboardViewController {
     
     var page = 1
     var totalPage = 1
-    var movieGenre = UserDefaults.genre
+    var movieGenre = UserDefaults.movieGenre
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +34,12 @@ class MainVC: BaseStoryboardViewController {
          */
         if movieGenre.isEmpty {
             APIManager.shared.call(
-                endPoint: .genre,
+                endPoint: .movieGenre,
                 responseData: Genres.self,
                 parameterDic: ["language": APILanguage.korea.rawValue]
             ) { response in
                 print("저장 값 없어서 저장 진행")
-                UserDefaults.genre = response.genres
+                UserDefaults.movieGenre = response.genres
                 self.callTrend(page: self.page)
                 
             } failure: { error in

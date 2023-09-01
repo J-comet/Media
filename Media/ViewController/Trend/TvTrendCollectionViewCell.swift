@@ -1,20 +1,29 @@
 //
-//  TrendCollectionViewCell.swift
+//  TvTrendCollectionViewCell.swift
 //  Media
 //
-//  Created by 장혜성 on 2023/08/28.
+//  Created by 장혜성 on 2023/09/01.
 //
 
 import UIKit
 import BaseFrameWork
 import SnapKit
 
-class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
+class TvTrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     
-//    let dateLabel = UILabel().setup { view in
-//        view.font = .systemFont(ofSize: 11, weight: .light)
-//        view.textColor = .darkGray
-//    }
+    let badgeButton = UIButton().setup { view in
+        var attString = AttributedString("TV")
+        attString.font = .monospacedSystemFont(ofSize: 14, weight: .medium)
+        attString.foregroundColor = .white
+        var config = UIButton.Configuration.filled()
+        config.attributedTitle = attString
+        config.contentInsets = .init(top: 4, leading: 8, bottom: 4, trailing: 8)
+        config.baseBackgroundColor = .link
+        view.configuration = config
+        
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 10
+    }
     
     let dateLabel = {
         let view = UILabel()
@@ -92,7 +101,7 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     }
 
     let guideDetailLabel = UILabel().setup { view in
-        view.text = "자세히 보기"
+        view.text = "TV 자세히 보기"
         view.font = .systemFont(ofSize: 12)
         view.textColor = .darkGray
     }
@@ -103,11 +112,11 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     }
     
     override func configCell(row: TrendsResult) {
-        dateLabel.text = row.getReleaseDate()
+        dateLabel.text = row.getDate()
         typeLabel.text = row.getGenre()
         voteLabel.text = row.getVoteAverage()
-        titleLabel.text = row.title
-        originTitleLabel.text = row.originalTitle
+        titleLabel.text = row.getTitle()
+        originTitleLabel.text = row.getOriginTitle()
         contentLabel.text = row.overview
         
         let url = URL(string: URL.getImg(imgaePath: row.backdropPath))
@@ -128,6 +137,7 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     }
     
     override func configureView() {
+        contentView.addSubview(badgeButton)
         contentView.addSubview(dateLabel)
         contentView.addSubview(typeLabel)
         contentView.addSubview(containerView)
@@ -148,6 +158,11 @@ class TrendCollectionViewCell: BaseCollectionViewCell<TrendsResult> {
     }
     
     override func setConstraints() {
+        badgeButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+        }
+        
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(8)

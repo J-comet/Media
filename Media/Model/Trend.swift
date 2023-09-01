@@ -28,40 +28,50 @@ struct Trends: Codable {
 
 // MARK: - Result
 struct TrendsResult: Codable {
-    let adult: Bool
     let backdropPath: String
     let id: Int
-    let title: String
+    let title: String?
+    let name: String?
+    let originalName: String?
     let originalLanguage: String
-    let originalTitle, overview, posterPath: String
+    let originalTitle: String?
+    let overview, posterPath: String
     let mediaType: String
     let genreIDS: [Int]
     let popularity: Double
-    let releaseDate: String
-    let video: Bool
+    let releaseDate: String?
+    let firstAirDate: String?
     let voteAverage: Double
     let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
-        case adult
         case backdropPath = "backdrop_path"
-        case id, title
+        case id, title, name
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
+        case originalName = "original_name"
         case overview
         case posterPath = "poster_path"
         case mediaType = "media_type"
         case genreIDS = "genre_ids"
         case popularity
         case releaseDate = "release_date"
-        case video
+        case firstAirDate = "first_air_date"
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
     
+    var genresInfo: [Genre] {
+        if self.mediaType == APIType.movie.rawValue {
+            return UserDefaults.movieGenre
+        } else {
+            return UserDefaults.tvGenre
+        }
+    }
+    
     func getGenre() -> String {
         var result = ""
-        for genre in UserDefaults.genre {
+        for genre in genresInfo {
             for id in genreIDS {
                 if id == genre.id {
                     result.append("#\(genre.name) ")
@@ -72,16 +82,46 @@ struct TrendsResult: Codable {
         return result
     }
     
+    func getTitle() -> String {
+        if let title {
+            return title
+        }
+        if let name {
+            return name
+        }
+        return "No Title"
+    }
+    
+    func getOriginTitle() -> String {
+        if let originalTitle {
+            return originalTitle
+        }
+        if let originalName {
+            return originalName
+        }
+        return "No Title"
+    }
+    
     func getVoteAverage() -> String {
         return "\(round(voteAverage * pow(10, 2)) / pow(10, 2))"
     }
     
-    func getReleaseDate() -> String {
+    func getDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        let date = dateFormatter.date(from: releaseDate)
-        dateFormatter.dateFormat = "MM/dd/YYYY"
-        return dateFormatter.string(from: date!)
+        if let releaseDate {
+            let date = dateFormatter.date(from: releaseDate)
+            dateFormatter.dateFormat = "MM/dd/YYYY"
+            return dateFormatter.string(from: date!)
+        }
+        
+        if let firstAirDate {
+            let date = dateFormatter.date(from: firstAirDate)
+            dateFormatter.dateFormat = "MM/dd/YYYY"
+            return dateFormatter.string(from: date!)
+        }
+        
+        return ""
     }
 }
 
