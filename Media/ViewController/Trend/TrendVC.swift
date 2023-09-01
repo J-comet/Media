@@ -121,7 +121,7 @@ class TrendVC: BaseViewController {
     private func callTrend(type: APIType, page: Int) {
         mainView.indicatorView.startAnimating()
         APIManager.shared.call(
-            endPoint: .trend(type: .person, period: "week"),
+            endPoint: .trend(type: type, period: "week"),
             responseData: Trends.self,
             parameterDic: [
                 "language":APILanguage.korea.rawValue,

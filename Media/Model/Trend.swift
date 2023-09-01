@@ -116,15 +116,15 @@ struct TrendsResult: Codable {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         if let releaseDate {
-            let date = dateFormatter.date(from: releaseDate)
+            let date = dateFormatter.date(from: releaseDate) ?? Date()
             dateFormatter.dateFormat = "MM/dd/YYYY"
-            return dateFormatter.string(from: date!)
+            return dateFormatter.string(from: date)
         }
         
         if let firstAirDate {
-            let date = dateFormatter.date(from: firstAirDate)
+            let date = dateFormatter.date(from: firstAirDate) ?? Date()
             dateFormatter.dateFormat = "MM/dd/YYYY"
-            return dateFormatter.string(from: date!)
+            return dateFormatter.string(from: date)
         }
         return ""
     }
