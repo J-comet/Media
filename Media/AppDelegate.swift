@@ -14,6 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UICollectionView.appearance().backgroundColor = .clear
+        UICollectionViewCell.appearance().backgroundColor = .clear
+        
+        
         return true
     }
 
